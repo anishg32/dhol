@@ -35,6 +35,17 @@ export default function HeroSection() {
         duration: 1,
         stagger: 0.2,
       }, "-=0.8");
+      
+      // Continuous rhythmic animation for the red text
+      gsap.to(".hero-red-text", {
+        scale: 1.05,
+        textShadow: "0 0 30px rgba(211, 47, 47, 0.8)",
+        duration: 0.8,
+        yoyo: true,
+        repeat: -1,
+        ease: "sine.inOut",
+        delay: 2.5
+      });
     }, containerRef);
     
     return () => ctx.revert();
@@ -65,7 +76,7 @@ export default function HeroSection() {
           </h1>
         </div>
         <div className="overflow-hidden mb-2">
-          <h1 className="hero-title-line font-heading text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-brand-red leading-none">
+          <h1 className="hero-title-line hero-red-text font-heading text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-brand-red leading-none origin-center inline-block">
             THAT MOVES
           </h1>
         </div>
