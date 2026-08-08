@@ -78,7 +78,7 @@ export default function AboutSection() {
             <div className="absolute inset-0 bg-brand-red/20 -translate-x-4 translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-700 ease-out z-0" />
             <div className="relative h-full w-full z-10 overflow-hidden">
               <img 
-                src="/images/about-img.jpg" 
+                src="/images/group-standing.jpg" 
                 alt="Team Aliyanz Experience" 
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 hover:scale-100"
               />

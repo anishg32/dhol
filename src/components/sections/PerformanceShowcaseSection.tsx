@@ -7,10 +7,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const SHOWCASE_IMAGES = [
-  "/images/wedding.jpg",
-  "/images/festival.jpg",
-  "/images/corporate.jpg",
-  "/images/about-img.jpg"
+  "/images/group-standing.jpg",
+  "/images/group-sitting.jpg",
+  "/images/group-traditional.jpg",
+  "/images/hero-bg.jpg"
 ];
 
 export default function PerformanceShowcaseSection() {

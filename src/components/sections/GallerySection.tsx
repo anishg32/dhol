@@ -5,12 +5,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 
 const GALLERY_IMAGES = [
+  "/images/hero-bg.jpg",
+  "/images/group-standing.jpg",
+  "/images/group-sitting.jpg",
+  "/images/group-traditional.jpg",
   "/images/wedding.jpg",
   "/images/festival.jpg",
-  "/images/corporate.jpg",
-  "/images/about-img.jpg",
-  "/images/hero-bg.jpg",
-  "/images/procession.jpg",
 ];
 
 export default function GallerySection() {
