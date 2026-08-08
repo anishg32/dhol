@@ -35,11 +35,11 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between">
         <Link href="/" className="flex flex-col items-center gap-1 group" data-cursor-text="HOME">
-          <div className="relative h-14 w-32 overflow-hidden flex items-center justify-center rounded bg-brand-black">
+          <div className="relative h-10 w-32 overflow-hidden flex items-center justify-center rounded bg-brand-black">
             <img 
               src="/images/logo.png" 
               alt="Team Aliyanz Logo" 
-              className="absolute w-[280%] max-w-none h-auto left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" 
+              className="absolute w-[200%] max-w-none h-auto left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" 
             />
           </div>
           <span className="font-heading tracking-[0.2em] text-[10px] text-brand-white font-bold group-hover:text-brand-red transition-colors">TEAM ALIYANZ</span>

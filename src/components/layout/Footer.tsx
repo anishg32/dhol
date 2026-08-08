@@ -12,11 +12,11 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start mb-16 space-y-12 md:space-y-0">
           <div className="text-center md:text-left max-w-sm">
             <Link href="/" className="flex flex-col items-center md:items-start gap-2 mb-6 group">
-              <div className="relative h-20 w-48 overflow-hidden rounded bg-brand-black">
+              <div className="relative h-14 w-48 overflow-hidden rounded bg-brand-black">
                 <img 
                   src="/images/logo.png" 
                   alt="Team Aliyanz Logo" 
-                  className="absolute w-[280%] max-w-none h-auto left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" 
+                  className="absolute w-[200%] max-w-none h-auto left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" 
                 />
               </div>
               <span className="font-heading tracking-[0.3em] text-sm text-brand-white font-bold mx-auto md:mx-0 group-hover:text-brand-red transition-colors">TEAM ALIYANZ</span>
