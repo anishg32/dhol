@@ -10,6 +10,7 @@ export default function Footer() {
 
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start mb-16 space-y-12 md:space-y-0">
+          <div className="text-center md:text-left max-w-sm">
             <Link href="/" className="font-heading text-4xl font-bold tracking-widest text-brand-white flex flex-col items-center md:items-start leading-none mb-4">
               <span className="text-sm tracking-[0.3em] text-brand-white/70 mb-2">TEAM</span>
               <span>ALIYANZ</span>
