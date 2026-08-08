@@ -24,32 +24,32 @@ export const EVENT_TYPES = [
   {
     title: "WEDDINGS",
     description: "Grand wedding entries and celebrations.",
-    image: "/images/wedding.jpg"
+    image: "/images/group-traditional.jpg"
   },
   {
     title: "FESTIVALS",
     description: "Energetic performances for cultural and festive occasions.",
-    image: "/images/festival.jpg"
+    image: "/images/group-standing.jpg"
   },
   {
     title: "CORPORATE EVENTS",
     description: "Professional performances for launches, celebrations and corporate gatherings.",
-    image: "/images/corporate.jpg"
+    image: "/images/group-sitting.jpg"
   },
   {
     title: "COLLEGE EVENTS",
     description: "High-energy performances for college celebrations and festivals.",
-    image: "/images/college.jpg"
+    image: "/images/hero-bg.jpg"
   },
   {
     title: "PROCESSIONS",
     description: "Powerful Team Aliyanz performances for grand processions.",
-    image: "/images/procession.jpg"
+    image: "/images/group-traditional.jpg"
   },
   {
     title: "PRIVATE CELEBRATIONS",
     description: "Special performances for birthdays, family celebrations and private events.",
-    image: "/images/private.jpg"
+    image: "/images/group-sitting.jpg"
   }
 ];
 
