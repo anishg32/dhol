@@ -57,11 +57,15 @@ export default function VideoSection() {
               exit={{ scale: 0.9, opacity: 0 }}
               className="w-full max-w-6xl aspect-video bg-black rounded-sm border border-brand-white/10 flex items-center justify-center"
             >
-              <div className="text-brand-white/50 flex flex-col items-center">
-                <Play size={48} className="mb-4 opacity-50" />
-                <p className="tracking-widest text-sm">[ VIDEO PLACEHOLDER ]</p>
-                <p className="text-xs mt-2 text-brand-white/30">Replace with actual performance video</p>
-              </div>
+              <video 
+                src="/videos/performance.mp4" 
+                controls 
+                autoPlay 
+                className="w-full h-full object-contain bg-black"
+                preload="metadata"
+              >
+                Your browser does not support the video tag.
+              </video>
             </motion.div>
           </motion.div>
         )}
