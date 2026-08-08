@@ -66,7 +66,7 @@ export default function HeroSection() {
       </div>
 
       {/* Intro Black Screen Overlay */}
-      <div className="hero-overlay absolute inset-0 bg-brand-black z-40" />
+      <div className="hero-overlay absolute inset-0 bg-brand-black z-40 pointer-events-none" />
 
       {/* Content */}
       <div className="relative z-20 container mx-auto px-6 lg:px-12 text-center flex flex-col items-center">
