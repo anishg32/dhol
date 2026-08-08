@@ -11,8 +11,14 @@ export default function Footer() {
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start mb-16 space-y-12 md:space-y-0">
           <div className="text-center md:text-left max-w-sm">
-            <Link href="/">
-              <img src="/images/logo.png" alt="Team Aliyanz Logo" className="h-16 w-auto object-contain mb-4 mx-auto md:mx-0" />
+            <Link href="/" className="block mb-6">
+              <div className="relative h-24 w-48 overflow-hidden mx-auto md:mx-0 flex items-center justify-center">
+                <img 
+                  src="/images/logo.png" 
+                  alt="Team Aliyanz Logo" 
+                  className="absolute h-[250%] w-auto object-cover mix-blend-screen" 
+                />
+              </div>
             </Link>
             <p className="text-brand-red font-bold tracking-[0.2em] text-xs mb-6">
               {BRAND.tagline}

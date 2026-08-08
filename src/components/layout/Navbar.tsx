@@ -35,7 +35,13 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between">
         <Link href="/" className="flex items-center" data-cursor-text="HOME">
-          <img src="/images/logo.png" alt="Team Aliyanz Logo" className="h-12 w-auto object-contain" />
+          <div className="relative h-20 w-40 overflow-hidden flex items-center justify-center">
+            <img 
+              src="/images/logo.png" 
+              alt="Team Aliyanz Logo" 
+              className="absolute h-[250%] w-auto object-cover mix-blend-screen" 
+            />
+          </div>
         </Link>
 
         {/* Desktop Nav */}
