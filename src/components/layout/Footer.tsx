@@ -11,14 +11,15 @@ export default function Footer() {
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start mb-16 space-y-12 md:space-y-0">
           <div className="text-center md:text-left max-w-sm">
-            <Link href="/" className="block mb-6">
-              <div className="relative h-24 w-48 overflow-hidden mx-auto md:mx-0 flex items-center justify-center">
+            <Link href="/" className="flex flex-col items-center md:items-start gap-2 mb-6 group">
+              <div className="relative h-20 w-48 overflow-hidden rounded bg-brand-black">
                 <img 
                   src="/images/logo.png" 
                   alt="Team Aliyanz Logo" 
-                  className="absolute h-[250%] w-auto object-cover mix-blend-screen" 
+                  className="absolute w-[280%] max-w-none h-auto left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" 
                 />
               </div>
+              <span className="font-heading tracking-[0.3em] text-sm text-brand-white font-bold mx-auto md:mx-0 group-hover:text-brand-red transition-colors">TEAM ALIYANZ</span>
             </Link>
             <p className="text-brand-red font-bold tracking-[0.2em] text-xs mb-6">
               {BRAND.tagline}
