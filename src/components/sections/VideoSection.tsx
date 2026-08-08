@@ -12,7 +12,7 @@ export default function VideoSection() {
       <div className="container mx-auto px-6 lg:px-12">
         <div className="mb-20 text-center">
           <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-brand-white">
-            WATCH THE <span className="text-brand-gold">ENERGY.</span>
+            WATCH THE <span className="text-brand-red">ENERGY.</span>
           </h2>
         </div>
 
@@ -29,7 +29,7 @@ export default function VideoSection() {
 
           {/* Play Button */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-24 h-24 rounded-full border border-brand-gold bg-brand-black/50 backdrop-blur-sm flex items-center justify-center text-brand-gold group-hover:bg-brand-gold group-hover:text-brand-black transition-all duration-500 hover:scale-110">
+            <div className="w-24 h-24 rounded-full border border-brand-red bg-brand-black/50 backdrop-blur-sm flex items-center justify-center text-brand-red group-hover:bg-brand-red group-hover:text-brand-black transition-all duration-500 hover:scale-110">
               <Play size={32} className="ml-2" />
             </div>
           </div>
@@ -46,7 +46,7 @@ export default function VideoSection() {
             className="fixed inset-0 z-[100] flex items-center justify-center bg-brand-black/95 p-4 md:p-12 backdrop-blur-md"
           >
             <button 
-              className="absolute top-6 right-6 text-brand-white/50 hover:text-brand-gold transition-colors z-[101]"
+              className="absolute top-6 right-6 text-brand-white/50 hover:text-brand-red transition-colors z-[101]"
               onClick={() => setIsPlaying(false)}
             >
               <X size={32} />

@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${cinzel.variable} ${inter.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col bg-brand-black text-brand-white selection:bg-brand-gold/30">
+      <body className="min-h-full flex flex-col bg-brand-black text-brand-white selection:bg-brand-red/30">
         {children}
       </body>
     </html>

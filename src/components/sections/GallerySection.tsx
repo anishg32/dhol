@@ -21,7 +21,7 @@ export default function GallerySection() {
       <div className="container mx-auto px-6 lg:px-12">
         <div className="mb-20 text-center">
           <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-brand-white">
-            VISUAL <span className="text-brand-gold">EXPERIENCE</span>
+            VISUAL <span className="text-brand-red">EXPERIENCE</span>
           </h2>
         </div>
 
@@ -34,7 +34,7 @@ export default function GallerySection() {
               data-cursor-text="EXPAND"
             >
               <div className="absolute inset-0 bg-brand-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 flex items-center justify-center">
-                <span className="text-brand-gold font-bold tracking-widest text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                <span className="text-brand-red font-bold tracking-widest text-sm translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                   VIEW IMAGE
                 </span>
               </div>
@@ -59,7 +59,7 @@ export default function GallerySection() {
             className="fixed inset-0 z-[100] flex items-center justify-center bg-brand-black/95 p-4 md:p-12 backdrop-blur-sm cursor-zoom-out"
           >
             <button 
-              className="absolute top-6 right-6 text-brand-white/50 hover:text-brand-gold transition-colors z-[101]"
+              className="absolute top-6 right-6 text-brand-white/50 hover:text-brand-red transition-colors z-[101]"
               onClick={() => setSelectedImage(null)}
             >
               <X size={32} />

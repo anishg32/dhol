@@ -45,7 +45,7 @@ export default function AboutSection() {
           <div ref={textRef} className="max-w-2xl">
             <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-brand-white leading-tight mb-8">
               <div className="overflow-hidden"><div className="about-text-reveal">MORE THAN A</div></div>
-              <div className="overflow-hidden"><div className="about-text-reveal text-brand-gold">PERFORMANCE.</div></div>
+              <div className="overflow-hidden"><div className="about-text-reveal text-brand-red">PERFORMANCE.</div></div>
               <div className="overflow-hidden"><div className="about-text-reveal">IT'S AN</div></div>
               <div className="overflow-hidden"><div className="about-text-reveal">EXPERIENCE.</div></div>
             </h2>
@@ -61,11 +61,11 @@ export default function AboutSection() {
             
             <div className="mt-12 grid grid-cols-2 gap-6 about-text-reveal">
               <div>
-                <div className="text-brand-gold font-bold text-3xl mb-2">100%</div>
+                <div className="text-brand-red font-bold text-3xl mb-2">100%</div>
                 <div className="text-sm tracking-widest text-brand-white/60">PROFESSIONAL</div>
               </div>
               <div>
-                <div className="text-brand-gold font-bold text-3xl mb-2">PURE</div>
+                <div className="text-brand-red font-bold text-3xl mb-2">PURE</div>
                 <div className="text-sm tracking-widest text-brand-white/60">ENERGY</div>
               </div>
             </div>
@@ -75,7 +75,7 @@ export default function AboutSection() {
             style={{ y, opacity }} 
             className="relative h-[600px] w-full group"
           >
-            <div className="absolute inset-0 bg-brand-gold/20 -translate-x-4 translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-700 ease-out z-0" />
+            <div className="absolute inset-0 bg-brand-red/20 -translate-x-4 translate-y-4 group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-700 ease-out z-0" />
             <div className="relative h-full w-full z-10 overflow-hidden">
               <img 
                 src="/images/about-img.jpg" 

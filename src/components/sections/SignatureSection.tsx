@@ -44,7 +44,7 @@ export default function SignatureSection() {
       </div>
 
       <div className="relative z-10 text-center w-full max-w-5xl px-6">
-        <h2 className="font-heading text-3xl md:text-4xl text-brand-gold mb-12 tracking-widest uppercase">
+        <h2 className="font-heading text-3xl md:text-4xl text-brand-red mb-12 tracking-widest uppercase">
           Feel the Rhythm
         </h2>
         

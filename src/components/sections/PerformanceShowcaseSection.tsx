@@ -50,7 +50,7 @@ export default function PerformanceShowcaseSection() {
     <section ref={sectionRef} className="h-screen bg-brand-black overflow-hidden flex flex-col justify-center">
       <div className="container mx-auto px-6 lg:px-12 mb-12 shrink-0">
         <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-brand-white">
-          THE <span className="text-brand-gold">PERFORMANCE</span>
+          THE <span className="text-brand-red">PERFORMANCE</span>
         </h2>
       </div>
       

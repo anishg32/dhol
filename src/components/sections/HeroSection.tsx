@@ -65,7 +65,7 @@ export default function HeroSection() {
           </h1>
         </div>
         <div className="overflow-hidden mb-2">
-          <h1 className="hero-title-line font-heading text-5xl md:text-7xl lg:text-9xl font-bold tracking-tight text-brand-gold leading-none">
+          <h1 className="hero-title-line font-heading text-5xl md:text-7xl lg:text-9xl font-bold tracking-tight text-brand-red leading-none">
             THAT MOVES
           </h1>
         </div>
@@ -82,7 +82,7 @@ export default function HeroSection() {
         <div className="flex flex-col sm:flex-row items-center gap-6">
           <a 
             href="#contact" 
-            className="hero-cta px-10 py-4 bg-brand-gold text-brand-black font-bold tracking-[0.2em] hover:bg-brand-white transition-colors duration-300"
+            className="hero-cta px-10 py-4 bg-brand-red text-brand-black font-bold tracking-[0.2em] hover:bg-brand-white transition-colors duration-300"
             data-cursor-text="BOOK"
           >
             BOOK A PERFORMANCE
@@ -99,7 +99,7 @@ export default function HeroSection() {
       {/* Scroll Indicator */}
       <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center opacity-70 animate-pulse">
         <span className="text-[10px] tracking-[0.3em] font-bold text-brand-white mb-4">SCROLL TO EXPERIENCE</span>
-        <div className="w-[1px] h-12 bg-gradient-to-b from-brand-gold to-transparent" />
+        <div className="w-[1px] h-12 bg-gradient-to-b from-brand-red to-transparent" />
       </div>
     </section>
   );

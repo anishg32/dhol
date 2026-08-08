@@ -44,14 +44,14 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium tracking-widest hover:text-brand-gold transition-colors"
+              className="text-sm font-medium tracking-widest hover:text-brand-red transition-colors"
             >
               {link.name}
             </Link>
           ))}
           <a
             href="#contact"
-            className="px-6 py-2 border border-brand-gold text-brand-gold hover:bg-brand-gold hover:text-brand-black transition-all duration-300 font-bold tracking-widest text-sm"
+            className="px-6 py-2 border border-brand-red text-brand-red hover:bg-brand-red hover:text-brand-black transition-all duration-300 font-bold tracking-widest text-sm"
           >
             BOOK NOW
           </a>
@@ -88,7 +88,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="font-heading text-3xl tracking-widest hover:text-brand-gold transition-colors"
+                  className="font-heading text-3xl tracking-widest hover:text-brand-red transition-colors"
                 >
                   {link.name}
                 </Link>
@@ -96,7 +96,7 @@ export default function Navbar() {
               <a
                 href="#contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="mt-8 px-8 py-3 bg-brand-gold text-brand-black font-bold tracking-widest text-lg"
+                className="mt-8 px-8 py-3 bg-brand-red text-brand-black font-bold tracking-widest text-lg"
               >
                 BOOK NOW
               </a>

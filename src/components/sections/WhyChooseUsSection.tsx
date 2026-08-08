@@ -22,7 +22,7 @@ export default function WhyChooseUsSection() {
             <motion.div style={{ y }} className="sticky top-32">
               <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-brand-white leading-tight mb-6">
                 BUILT FOR <br />
-                <span className="text-brand-gold">BIG MOMENTS.</span>
+                <span className="text-brand-red">BIG MOMENTS.</span>
               </h2>
               <p className="text-brand-white/70 text-lg">
                 We don't just play instruments; we create an atmosphere. Discover what makes Team Aliyanz the premier choice for your next event.
@@ -34,9 +34,9 @@ export default function WhyChooseUsSection() {
             {FEATURES.map((feature, idx) => (
               <div 
                 key={idx}
-                className="bg-brand-black p-10 border border-brand-white/5 hover:border-brand-gold/50 transition-colors duration-500 group"
+                className="bg-brand-black p-10 border border-brand-white/5 hover:border-brand-red/50 transition-colors duration-500 group"
               >
-                <div className="w-12 h-12 rounded-full bg-brand-white/5 flex items-center justify-center text-brand-gold font-heading font-bold text-xl mb-6 group-hover:scale-110 group-hover:bg-brand-gold group-hover:text-brand-black transition-all duration-500">
+                <div className="w-12 h-12 rounded-full bg-brand-white/5 flex items-center justify-center text-brand-red font-heading font-bold text-xl mb-6 group-hover:scale-110 group-hover:bg-brand-red group-hover:text-brand-black transition-all duration-500">
                   {idx + 1}
                 </div>
                 <h3 className="font-bold tracking-widest text-brand-white mb-4 text-lg">{feature.title}</h3>

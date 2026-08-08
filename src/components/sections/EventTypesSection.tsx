@@ -19,7 +19,7 @@ export default function EventTypesSection() {
       <div className="container mx-auto px-6 lg:px-12">
         <motion.div style={{ y }} className="mb-20 text-center">
           <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-brand-white">
-            WHERE THE <span className="text-brand-gold">RHYTHM</span> BELONGS
+            WHERE THE <span className="text-brand-red">RHYTHM</span> BELONGS
           </h2>
         </motion.div>
 
@@ -40,7 +40,7 @@ export default function EventTypesSection() {
               </div>
               
               <div className="absolute inset-0 p-8 flex flex-col justify-end translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
-                <div className="w-12 h-[1px] bg-brand-gold mb-6 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-100" />
+                <div className="w-12 h-[1px] bg-brand-red mb-6 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 delay-100" />
                 <h3 className="font-heading text-2xl font-bold text-brand-white mb-2">{event.title}</h3>
                 <p className="text-brand-white/70 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
                   {event.description}

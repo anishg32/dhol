@@ -34,7 +34,7 @@ export default function StatsSection() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 md:gap-6 text-center">
           {STATS.map((stat, idx) => (
             <div key={idx} className="stat-item flex flex-col items-center justify-center">
-              <div className="font-heading text-5xl md:text-6xl font-bold text-brand-gold mb-4 drop-shadow-[0_0_15px_rgba(197,160,89,0.3)]">
+              <div className="font-heading text-5xl md:text-6xl font-bold text-brand-red mb-4 drop-shadow-[0_0_15px_rgba(197,160,89,0.3)]">
                 {stat.value}
               </div>
               <div className="text-brand-white/60 text-sm tracking-widest uppercase font-bold">
