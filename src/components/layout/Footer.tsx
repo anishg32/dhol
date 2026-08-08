@@ -11,9 +11,9 @@ export default function Footer() {
       <div className="container mx-auto px-6 lg:px-12 relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start mb-16 space-y-12 md:space-y-0">
           <div className="text-center md:text-left max-w-sm">
-            <h2 className="font-heading text-4xl font-bold tracking-widest text-brand-white mb-2">
-              TEAM <span className="text-brand-gold">ALYAAN</span>
-            </h2>
+            <Link href="/">
+              <img src="/images/logo.png" alt="Team Aliyanz Logo" className="h-16 w-auto object-contain mb-4 mx-auto md:mx-0" />
+            </Link>
             <p className="text-brand-gold font-bold tracking-[0.2em] text-xs mb-6">
               {BRAND.tagline}
             </p>

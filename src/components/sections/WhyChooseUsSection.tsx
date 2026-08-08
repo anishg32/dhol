@@ -25,7 +25,7 @@ export default function WhyChooseUsSection() {
                 <span className="text-brand-gold">BIG MOMENTS.</span>
               </h2>
               <p className="text-brand-white/70 text-lg">
-                We don't just play instruments; we create an atmosphere. Discover what makes Team Alyaan the premier choice for your next event.
+                We don't just play instruments; we create an atmosphere. Discover what makes Team Aliyanz the premier choice for your next event.
               </p>
             </motion.div>
           </div>

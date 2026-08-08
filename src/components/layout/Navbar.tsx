@@ -34,8 +34,8 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between">
-        <Link href="/" className="font-heading text-2xl font-bold tracking-widest text-brand-white" data-cursor-text="HOME">
-          TEAM <span className="text-brand-gold">ALYAAN</span>
+        <Link href="/" className="flex items-center" data-cursor-text="HOME">
+          <img src="/images/logo.png" alt="Team Aliyanz Logo" className="h-12 w-auto object-contain" />
         </Link>
 
         {/* Desktop Nav */}

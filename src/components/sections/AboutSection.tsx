@@ -52,7 +52,7 @@ export default function AboutSection() {
             
             <div className="space-y-6 text-brand-white/70 text-lg about-text-reveal">
               <p>
-                We bring the powerful, traditional rhythm of Team Alyaan to major celebrations and events. Our performances are not just heard; they are felt.
+                We bring the powerful, traditional rhythm of Team Aliyanz to major celebrations and events. Our performances are not just heard; they are felt.
               </p>
               <p>
                 With a highly professional and coordinated team, we deliver high-energy performances designed to bring the crowd into the moment and create unforgettable memories.
@@ -79,7 +79,7 @@ export default function AboutSection() {
             <div className="relative h-full w-full z-10 overflow-hidden">
               <img 
                 src="/images/about-img.jpg" 
-                alt="Team Alyaan Experience" 
+                alt="Team Aliyanz Experience" 
                 className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 hover:scale-100"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-black/80 to-transparent mix-blend-multiply" />

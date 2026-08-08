@@ -47,7 +47,7 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-brand-black/80 via-brand-black/50 to-brand-black z-10" />
         <img 
           src="/images/hero-bg.jpg" 
-          alt="Team Alyaan Performance" 
+          alt="Team Aliyanz Performance" 
           className="w-full h-full object-cover object-center scale-105 animate-[slow-pan_30s_linear_infinite_alternate]"
         />
         {/* Dust Particles overlay placeholder */}
@@ -76,7 +76,7 @@ export default function HeroSection() {
         </div>
 
         <p className="hero-subtitle text-lg md:text-xl text-brand-white/80 max-w-2xl font-medium tracking-wide mb-12">
-          Premium Team Alyaan performances for unforgettable celebrations and events.
+          Premium Team Aliyanz performances for unforgettable celebrations and events.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center gap-6">

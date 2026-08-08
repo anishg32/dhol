@@ -13,11 +13,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Team Alyaan | Premium Dhol Performance for Events & Celebrations",
-  description: "Experience powerful Team Alyaan performances for weddings, festivals, college events, corporate celebrations, processions and special occasions. Contact us for event bookings.",
+  title: "Team Aliyanz | Premium Dhol Performance for Events & Celebrations",
+  description: "Experience powerful Team Aliyanz performances for weddings, festivals, college events, corporate celebrations, processions and special occasions. Contact us for event bookings.",
   openGraph: {
-    title: "Team Alyaan | Premium Dhol Performance for Events & Celebrations",
-    description: "Experience powerful Team Alyaan performances for weddings, festivals, college events, corporate celebrations, processions and special occasions. Contact us for event bookings.",
+    title: "Team Aliyanz | Premium Dhol Performance for Events & Celebrations",
+    description: "Experience powerful Team Aliyanz performances for weddings, festivals, college events, corporate celebrations, processions and special occasions. Contact us for event bookings.",
     type: "website",
     locale: "en_IN",
   },

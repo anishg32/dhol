@@ -1,7 +1,7 @@
 export const BRAND = {
-  name: "Team Alyaan",
+  name: "Team Aliyanz",
   tagline: "TRADITION. POWER. RHYTHM.",
-  description: "Premium Team Alyaan performances for unforgettable celebrations and events.",
+  description: "Premium Team Aliyanz performances for unforgettable celebrations and events.",
   phone: "+91 98765 43210",
   whatsapp: "+91 98765 43210",
   email: "booking@teamalyaan.example.com",
@@ -43,7 +43,7 @@ export const EVENT_TYPES = [
   },
   {
     title: "PROCESSIONS",
-    description: "Powerful Team Alyaan performances for grand processions.",
+    description: "Powerful Team Aliyanz performances for grand processions.",
     image: "/images/procession.jpg"
   },
   {
@@ -64,7 +64,7 @@ export const FEATURES = [
   },
   {
     title: "TRADITIONAL RHYTHM",
-    description: "Authentic Team Alyaan experience."
+    description: "Authentic Team Aliyanz experience."
   },
   {
     title: "EVENT READY",
