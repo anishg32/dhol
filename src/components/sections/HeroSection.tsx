@@ -60,17 +60,17 @@ export default function HeroSection() {
       {/* Content */}
       <div className="relative z-20 container mx-auto px-6 lg:px-12 text-center flex flex-col items-center">
         <div className="overflow-hidden mb-2">
-          <h1 className="hero-title-line font-heading text-5xl md:text-7xl lg:text-9xl font-bold tracking-tight text-brand-white leading-none">
+          <h1 className="hero-title-line font-heading text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-brand-white leading-none">
             THE RHYTHM
           </h1>
         </div>
         <div className="overflow-hidden mb-2">
-          <h1 className="hero-title-line font-heading text-5xl md:text-7xl lg:text-9xl font-bold tracking-tight text-brand-red leading-none">
+          <h1 className="hero-title-line font-heading text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-brand-red leading-none">
             THAT MOVES
           </h1>
         </div>
         <div className="overflow-hidden mb-8">
-          <h1 className="hero-title-line font-heading text-5xl md:text-7xl lg:text-9xl font-bold tracking-tight text-brand-white leading-none">
+          <h1 className="hero-title-line font-heading text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight text-brand-white leading-none">
             THE CROWD.
           </h1>
         </div>
