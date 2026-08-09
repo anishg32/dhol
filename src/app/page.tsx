@@ -10,7 +10,6 @@ import PerformanceShowcaseSection from "@/components/sections/PerformanceShowcas
 import GallerySection from "@/components/sections/GallerySection";
 import VideoSection from "@/components/sections/VideoSection";
 import WhyChooseUsSection from "@/components/sections/WhyChooseUsSection";
-import StatsSection from "@/components/sections/StatsSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import ContactSection from "@/components/sections/ContactSection";
 
@@ -29,7 +28,6 @@ export default function Home() {
         <GallerySection />
         <VideoSection />
         <WhyChooseUsSection />
-        <StatsSection />
         <TestimonialsSection />
         <ContactSection />
       </main>

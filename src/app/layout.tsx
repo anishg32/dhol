@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Cinzel, Inter } from "next/font/google";
 import "./globals.css";
+import { siteConfig } from "@/config/site";
+import WhatsAppFAB from "@/components/ui/WhatsAppFAB";
+import MobileStickyAction from "@/components/ui/MobileStickyAction";
 
 const cinzel = Cinzel({
   variable: "--font-cinzel",
@@ -13,13 +16,27 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Team Aliyanz | Premium Dhol Performance for Events & Celebrations",
-  description: "Experience powerful Team Aliyanz performances for weddings, festivals, college events, corporate celebrations, processions and special occasions. Contact us for event bookings.",
+  title: siteConfig.name,
+  description: siteConfig.description,
   openGraph: {
-    title: "Team Aliyanz | Premium Dhol Performance for Events & Celebrations",
-    description: "Experience powerful Team Aliyanz performances for weddings, festivals, college events, corporate celebrations, processions and special occasions. Contact us for event bookings.",
+    title: siteConfig.name,
+    description: siteConfig.description,
     type: "website",
     locale: "en_IN",
+    images: [
+      {
+        url: siteConfig.ogImage,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.name,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
   },
 };
 
@@ -29,8 +46,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${cinzel.variable} ${inter.variable} h-full antialiased dark`}
     >
-      <body className="min-h-full flex flex-col bg-brand-black text-brand-white selection:bg-brand-red/30">
+      <body className="min-h-full flex flex-col bg-brand-black text-brand-white selection:bg-brand-red/30 pb-[64px] md:pb-0">
         {children}
+        <WhatsAppFAB />
+        <MobileStickyAction />
       </body>
     </html>
   );
