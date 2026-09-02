@@ -7,7 +7,7 @@ export const BRAND = {
   email: "booking@teamalyaan.example.com",
   location: "Mumbai, Maharashtra",
   socials: {
-    instagram: "https://instagram.com/teamalyaan",
+    instagram: "https://instagram.com/aliyan_beatz_ofl",
     facebook: "https://facebook.com/teamalyaan",
     youtube: "https://youtube.com/teamalyaan",
   }

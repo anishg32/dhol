@@ -3,26 +3,60 @@
 import { useState } from "react";
 import { siteConfig } from "@/config/site";
 import { motion, AnimatePresence } from "framer-motion";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+
+const bookingSchema = z.object({
+  customerName: z.string().min(2, "Name is required"),
+  mobileNumber: z.string().min(10, "Valid mobile number is required"),
+  whatsappNumber: z.string().min(10, "Valid WhatsApp number is required"),
+  email: z.string().email("Valid email is required"),
+  eventType: z.string().min(1, "Event type is required"),
+  eventDate: z.string().min(1, "Date is required"),
+  eventStartTime: z.string().min(1, "Start time is required"),
+  eventEndTime: z.string().min(1, "End time is required"),
+  eventLocation: z.string().min(1, "Location is required"),
+  expectedCrowd: z.string().min(1, "Expected crowd is required"),
+  requirements: z.string().optional(),
+});
+
+type BookingFormData = z.infer<typeof bookingSchema>;
 
 export default function ContactSection() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [bookingId, setBookingId] = useState<string | null>(null);
+  const [serverError, setServerError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setIsSuccess(true);
-      
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setIsSuccess(false);
-        (e.target as HTMLFormElement).reset();
-      }, 5000);
-    }, 1500);
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm<BookingFormData>({
+    resolver: zodResolver(bookingSchema),
+  });
+
+  const onSubmit = async (data: BookingFormData) => {
+    setServerError(null);
+    try {
+      const res = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const responseData = await res.json();
+
+      if (res.ok) {
+        setBookingId(responseData.bookingId);
+        setIsSuccess(true);
+      } else {
+        setServerError(responseData.error || "Something went wrong.");
+      }
+    } catch (error) {
+      setServerError("Unable to submit your booking right now. Please try again.");
+    }
   };
 
   const whatsappLink = `https://wa.me/${siteConfig.contact.whatsapp.replace(/[^0-9]/g, '')}`;
@@ -65,7 +99,7 @@ export default function ContactSection() {
           <div className="relative animate-on-scroll">
             <div className="absolute inset-0 bg-brand-black border border-brand-white/5 rounded-sm z-0 pointer-events-none" />
             
-            <form onSubmit={handleSubmit} className="relative z-10 p-8 md:p-12">
+            <div className="relative z-10 p-8 md:p-12">
               <AnimatePresence mode="wait">
                 {isSuccess ? (
                   <motion.div 
@@ -73,80 +107,178 @@ export default function ContactSection() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0 }}
-                    className="flex flex-col items-center justify-center h-[600px] text-center"
+                    className="flex flex-col items-center justify-center h-[650px] text-center"
                   >
                     <div className="w-24 h-24 bg-brand-red rounded-full flex items-center justify-center mb-8">
                       <svg className="w-12 h-12 text-brand-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <h3 className="font-heading text-4xl font-bold text-brand-white mb-4">ENQUIRY RECEIVED</h3>
-                    <p className="text-brand-white/70 text-lg mb-8">We will contact you shortly to discuss your event.</p>
-                    <p className="text-brand-white/50 text-sm">Need immediate assistance? <a href={whatsappLink} className="text-[#25D366] hover:underline">WhatsApp Us</a></p>
+                    <h3 className="font-heading text-3xl md:text-4xl font-bold text-brand-white mb-4">
+                      Booking Request Submitted Successfully
+                    </h3>
+                    <div className="bg-brand-charcoal border border-brand-white/10 p-4 rounded-sm mb-6 inline-block">
+                      <span className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50 block mb-1">BOOKING ID</span>
+                      <span className="font-mono text-xl text-brand-red">{bookingId}</span>
+                    </div>
+                    <p className="text-brand-white/70 text-lg mb-8">
+                      We have received your booking request and our team will contact you shortly to confirm the details.
+                    </p>
+                    <button 
+                      onClick={() => {
+                        setIsSuccess(false);
+                        setBookingId(null);
+                        reset();
+                      }}
+                      className="px-6 py-3 border border-brand-white/20 text-sm tracking-widest uppercase hover:bg-brand-white/5 transition-colors rounded-sm"
+                    >
+                      Book Another Event
+                    </button>
                   </motion.div>
                 ) : (
-                  <motion.div
+                  <motion.form
                     key="form"
                     initial={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
+                    onSubmit={handleSubmit(onSubmit)}
                     className="space-y-6"
                   >
+                    {serverError && (
+                      <div className="bg-brand-red/10 border border-brand-red text-brand-red px-4 py-3 rounded-sm text-sm">
+                        {serverError}
+                      </div>
+                    )}
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
                         <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">FULL NAME</label>
-                        <input required type="text" className="w-full bg-transparent border-b border-brand-white/20 px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors" placeholder="John Doe" />
+                        <input 
+                          {...register("customerName")}
+                          type="text" 
+                          className={`w-full bg-transparent border-b ${errors.customerName ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors`} 
+                          placeholder="John Doe" 
+                        />
+                        {errors.customerName && <p className="text-brand-red text-xs mt-1">{errors.customerName.message}</p>}
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">PHONE NUMBER</label>
-                        <input required type="tel" className="w-full bg-transparent border-b border-brand-white/20 px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors" placeholder="+91 98765 43210" />
+                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">MOBILE NUMBER</label>
+                        <input 
+                          {...register("mobileNumber")}
+                          type="tel" 
+                          className={`w-full bg-transparent border-b ${errors.mobileNumber ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors`} 
+                          placeholder="+91 98765 43210" 
+                        />
+                        {errors.mobileNumber && <p className="text-brand-red text-xs mt-1">{errors.mobileNumber.message}</p>}
                       </div>
                     </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
+                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">WHATSAPP NUMBER</label>
+                        <input 
+                          {...register("whatsappNumber")}
+                          type="tel" 
+                          className={`w-full bg-transparent border-b ${errors.whatsappNumber ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors`} 
+                          placeholder="+91 98765 43210" 
+                        />
+                        {errors.whatsappNumber && <p className="text-brand-red text-xs mt-1">{errors.whatsappNumber.message}</p>}
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">EMAIL ADDRESS</label>
+                        <input 
+                          {...register("email")}
+                          type="email" 
+                          className={`w-full bg-transparent border-b ${errors.email ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors`} 
+                          placeholder="john@example.com" 
+                        />
+                        {errors.email && <p className="text-brand-red text-xs mt-1">{errors.email.message}</p>}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
                         <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">EVENT TYPE</label>
-                        <select required defaultValue="" className="w-full bg-brand-black border-b border-brand-white/20 px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors appearance-none">
+                        <select 
+                          {...register("eventType")}
+                          defaultValue="" 
+                          className={`w-full bg-brand-black border-b ${errors.eventType ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors appearance-none`}
+                        >
                           <option value="" disabled>Select Event</option>
                           {siteConfig.events.map(e => (
                             <option key={e.title} value={e.title.toLowerCase()}>{e.title}</option>
                           ))}
                           <option value="other">Other</option>
                         </select>
+                        {errors.eventType && <p className="text-brand-red text-xs mt-1">{errors.eventType.message}</p>}
                       </div>
                       <div className="space-y-2">
                         <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">EVENT DATE</label>
-                        <input required type="date" className="w-full bg-transparent border-b border-brand-white/20 px-0 py-3 text-brand-white/50 focus:text-brand-white focus:outline-none focus:border-brand-red transition-colors [color-scheme:dark]" />
+                        <input 
+                          {...register("eventDate")}
+                          type="date" 
+                          className={`w-full bg-transparent border-b ${errors.eventDate ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white/50 focus:text-brand-white focus:outline-none focus:border-brand-red transition-colors [color-scheme:dark]`} 
+                        />
+                        {errors.eventDate && <p className="text-brand-red text-xs mt-1">{errors.eventDate.message}</p>}
                       </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">EVENT LOCATION</label>
-                      <input required type="text" className="w-full bg-transparent border-b border-brand-white/20 px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors" placeholder="City, Venue Name" />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">NUMBER OF PERFORMERS</label>
-                        <select className="w-full bg-brand-black border-b border-brand-white/20 px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors appearance-none">
-                          <option value="standard">Standard (10-15)</option>
-                          <option value="large">Large (20-30)</option>
-                          <option value="grand">Grand (40+)</option>
-                          <option value="custom">Not sure, need advice</option>
-                        </select>
+                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">START TIME</label>
+                        <input 
+                          {...register("eventStartTime")}
+                          type="time" 
+                          className={`w-full bg-transparent border-b ${errors.eventStartTime ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white/50 focus:text-brand-white focus:outline-none focus:border-brand-red transition-colors [color-scheme:dark]`} 
+                        />
+                        {errors.eventStartTime && <p className="text-brand-red text-xs mt-1">{errors.eventStartTime.message}</p>}
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">PERFORMANCE DURATION</label>
-                        <select className="w-full bg-brand-black border-b border-brand-white/20 px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors appearance-none">
-                          <option value="1">1 Hour</option>
-                          <option value="2">2 Hours</option>
-                          <option value="3">3+ Hours</option>
+                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">END TIME</label>
+                        <input 
+                          {...register("eventEndTime")}
+                          type="time" 
+                          className={`w-full bg-transparent border-b ${errors.eventEndTime ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white/50 focus:text-brand-white focus:outline-none focus:border-brand-red transition-colors [color-scheme:dark]`} 
+                        />
+                        {errors.eventEndTime && <p className="text-brand-red text-xs mt-1">{errors.eventEndTime.message}</p>}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">EVENT LOCATION</label>
+                        <input 
+                          {...register("eventLocation")}
+                          type="text" 
+                          className={`w-full bg-transparent border-b ${errors.eventLocation ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors`} 
+                          placeholder="City, Venue Name" 
+                        />
+                        {errors.eventLocation && <p className="text-brand-red text-xs mt-1">{errors.eventLocation.message}</p>}
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">EXPECTED CROWD</label>
+                        <select 
+                          {...register("expectedCrowd")}
+                          defaultValue=""
+                          className={`w-full bg-brand-black border-b ${errors.expectedCrowd ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors appearance-none`}
+                        >
+                          <option value="" disabled>Select Crowd Size</option>
+                          <option value="50-100">50 - 100 People</option>
+                          <option value="100-300">100 - 300 People</option>
+                          <option value="300-500">300 - 500 People</option>
+                          <option value="500+">500+ People</option>
                         </select>
+                        {errors.expectedCrowd && <p className="text-brand-red text-xs mt-1">{errors.expectedCrowd.message}</p>}
                       </div>
                     </div>
 
                     <div className="space-y-2 pt-2">
-                      <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">ADDITIONAL REQUIREMENTS</label>
-                      <textarea rows={3} className="w-full bg-transparent border-b border-brand-white/20 px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors resize-none" placeholder="Any specific requests?"></textarea>
+                      <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">ADDITIONAL REQUIREMENTS (OPTIONAL)</label>
+                      <textarea 
+                        {...register("requirements")}
+                        rows={3} 
+                        className="w-full bg-transparent border-b border-brand-white/20 px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors resize-none" 
+                        placeholder="Any specific requests?"
+                      />
                     </div>
 
                     <button 
@@ -160,10 +292,10 @@ export default function ContactSection() {
                         <span className="group-hover:scale-105 transition-transform">SEND ENQUIRY</span>
                       )}
                     </button>
-                  </motion.div>
+                  </motion.form>
                 )}
               </AnimatePresence>
-            </form>
+            </div>
           </div>
         </div>
       </div>

@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Booking {
+  id                 String   @id @default(cuid())
+  bookingId          String   @unique
+  customerName       String
+  mobileNumber       String
+  whatsappNumber     String
+  email              String
+  eventType          String
+  eventDate          String
+  eventStartTime     String
+  eventEndTime       String
+  eventLocation      String
+  expectedCrowd      String
+  requirements       String?
+  status             String   @default("Pending")
+  notificationStatus String   @default("pending")
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}

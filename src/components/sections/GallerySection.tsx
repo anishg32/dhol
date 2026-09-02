@@ -5,6 +5,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { X, ZoomIn } from "lucide-react";
 
 const GALLERY_IMAGES = [
+  "/images/new-image-1.jpg", // REPLACE THIS WITH YOUR FIRST IMAGE
+  "/images/new-image-2.jpg", // REPLACE THIS WITH YOUR SECOND IMAGE
+  "/images/new-image-3.jpg", // REPLACE THIS WITH YOUR THIRD IMAGE
   "/images/hero-bg.jpg",
   "/images/group-standing.jpg",
   "/images/group-sitting.jpg",

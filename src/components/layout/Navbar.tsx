@@ -89,6 +89,13 @@ export default function Navbar() {
           >
             BOOK NOW
           </a>
+          <Link
+            href="/admin"
+            className="ml-4 text-xs font-bold tracking-widest text-brand-white/40 hover:text-brand-white transition-colors"
+            title="Admin Login"
+          >
+            ADMIN
+          </Link>
         </nav>
 
         {/* Mobile Toggle */}
@@ -139,7 +146,7 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 + NAV_LINKS.length * 0.1 }}
-                className="w-full max-w-xs pt-8"
+                className="w-full max-w-xs pt-8 flex flex-col gap-4"
               >
                 <a
                   href="#contact"
@@ -148,6 +155,13 @@ export default function Navbar() {
                 >
                   BOOK NOW
                 </a>
+                <Link
+                  href="/admin"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block w-full text-center px-8 py-3 border border-brand-white/20 text-brand-white/50 hover:text-brand-white font-bold tracking-widest text-sm rounded-sm"
+                >
+                  ADMIN LOGIN
+                </Link>
               </motion.div>
             </nav>
           </motion.div>

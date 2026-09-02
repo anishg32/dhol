@@ -4,13 +4,13 @@ export const siteConfig = {
   url: "https://teamaliyanz.com", // Replace with real URL
   ogImage: "/images/og-image.jpg",
   contact: {
-    whatsapp: "+919876543210", // Replace with real WhatsApp number
-    phone: "+919876543210", // Replace with real phone number
+    whatsapp: "+918903287741",
+    phone: "+918903287741",
     email: "booking@teamaliyanz.com", // Replace with real email
-    location: "Mumbai, Maharashtra (Available Worldwide)",
+    location: "R.C Street, Puthukkadai, KK Dist",
   },
   social: {
-    instagram: "https://instagram.com/teamaliyanz",
+    instagram: "https://instagram.com/aliyan_beatz_ofl",
     youtube: "https://youtube.com/teamaliyanz",
   },
   stats: [
