@@ -1,10 +1,8 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
-import { LogOut, Search, RefreshCw, Trash2, CheckCircle, XCircle, Clock } from "lucide-react";
+import { Search, RefreshCw, Trash2, CheckCircle, XCircle, Clock } from "lucide-react";
 import { format } from "date-fns";
-import Link from "next/link";
 
 type Booking = {
   id: string;
@@ -26,7 +24,6 @@ type Booking = {
 };
 
 export default function AdminDashboard() {
-  const router = useRouter();
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -59,11 +56,7 @@ export default function AdminDashboard() {
     return () => clearInterval(interval);
   }, [fetchBookings]);
 
-  const handleLogout = async () => {
-    await fetch("/api/auth", { method: "DELETE" });
-    router.push("/admin/login");
-    router.refresh();
-  };
+
 
   const updateStatus = async (id: string, newStatus: string) => {
     try {
@@ -107,31 +100,7 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-brand-charcoal text-brand-white">
-      {/* Header */}
-      <header className="bg-brand-black border-b border-brand-white/10 sticky top-0 z-40">
-        <div className="container mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <h1 className="font-heading text-xl font-bold">DHOL <span className="text-brand-red">ADMIN</span></h1>
-          </div>
-          <div className="flex items-center gap-6">
-            <Link 
-              href="/"
-              className="text-xs font-bold tracking-widest text-brand-white/50 hover:text-brand-white transition-colors uppercase"
-            >
-              Back to Website
-            </Link>
-            <button 
-              onClick={handleLogout}
-              className="flex items-center gap-2 text-sm text-brand-white/70 hover:text-brand-white transition-colors"
-            >
-              <LogOut size={16} /> Logout
-            </button>
-          </div>
-        </div>
-      </header>
-
-      <main className="container mx-auto px-6 py-8 flex flex-col lg:flex-row gap-8">
+    <main className="container mx-auto px-6 py-8 flex flex-col lg:flex-row gap-8">
         
         {/* Main List */}
         <div className={`flex-1 ${selectedBooking ? 'hidden lg:block' : 'block'}`}>
@@ -342,6 +311,5 @@ export default function AdminDashboard() {
           </div>
         )}
       </main>
-    </div>
   );
 }

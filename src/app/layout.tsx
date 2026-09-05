@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cinzel, Inter } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import { siteConfig } from "@/config/site";
 import WhatsAppFAB from "@/components/ui/WhatsAppFAB";
@@ -48,6 +49,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="min-h-full flex flex-col bg-brand-black text-brand-white selection:bg-brand-red/30 pb-[64px] md:pb-0">
         {children}
+        <Toaster 
+          position="bottom-right"
+          toastOptions={{
+            style: {
+              background: '#1A1A1A',
+              color: '#FFFFFF',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              borderRadius: '2px',
+              fontSize: '14px',
+            },
+            success: {
+              iconTheme: {
+                primary: '#D32F2F', // Brand red
+                secondary: '#1A1A1A',
+              },
+            },
+          }}
+        />
         <WhatsAppFAB />
         <MobileStickyAction />
       </body>

@@ -12,6 +12,7 @@ import VideoSection from "@/components/sections/VideoSection";
 import WhyChooseUsSection from "@/components/sections/WhyChooseUsSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import ContactSection from "@/components/sections/ContactSection";
+import SimpleContactSection from "@/components/sections/SimpleContactSection";
 
 export default function Home() {
   return (
@@ -30,6 +31,7 @@ export default function Home() {
         <WhyChooseUsSection />
         <TestimonialsSection />
         <ContactSection />
+        <SimpleContactSection />
       </main>
 
       <Footer />
