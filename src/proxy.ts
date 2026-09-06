@@ -30,7 +30,7 @@ export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
   const method = request.method
 
-  const isAdminPage = pathname.startsWith('/admin')
+  const isAdminPage = pathname.startsWith('/admin') && pathname !== '/admin/login'
   const isAdminApi = 
     (pathname.startsWith('/api/messages') && method !== 'POST' && pathname !== '/api/messages/unread-count') ||
     (pathname === '/api/messages/unread-count') ||
@@ -46,9 +46,9 @@ export default async function proxy(request: NextRequest) {
       if (isAdminApi) {
         return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
       }
-      // no user, redirect to login
+      // no user, redirect to admin login
       const url = request.nextUrl.clone()
-      url.pathname = '/login'
+      url.pathname = '/admin/login'
       return NextResponse.redirect(url)
     }
 
@@ -64,7 +64,7 @@ export default async function proxy(request: NextRequest) {
       
       // Redirect for pages
       const url = request.nextUrl.clone()
-      url.pathname = '/login'
+      url.pathname = '/admin/login'
       url.searchParams.set('error', 'unauthorized')
       return NextResponse.redirect(url)
     }

@@ -2,62 +2,46 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { createClient } from "@/utils/supabase/client";
-import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-type ViewState = "login" | "forgot_password" | "check_email";
+type ViewState = "signup" | "check_email";
 
-export default function LoginPortal() {
-  const [view, setView] = useState<ViewState>("login");
+export default function SignupPortal() {
+  const [view, setView] = useState<ViewState>("signup");
   const [isLoading, setIsLoading] = useState(false);
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   
   const supabase = createClient();
-  const router = useRouter();
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("error") === "auth-callback-failed") {
-      toast.error("Authentication failed or confirmation link expired. Please try again.");
-      window.history.replaceState({}, document.title, "/login");
-    }
-  }, []);
-
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
     
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      if (error.message.includes("Email not confirmed")) {
-        toast.error("Please confirm your email before logging in.");
-      } else {
-        toast.error(error.message);
-      }
-      setIsLoading(false);
-    } else {
-      router.push("/dashboard");
-    }
-  };
-
-  const handleForgotPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) {
-      toast.error("Please enter your email first.");
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
       return;
     }
     
+    if (password.length < 6) {
+      toast.error("Password must be at least 6 characters long");
+      return;
+    }
+
     setIsLoading(true);
     
-    const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/api/auth/callback?next=/update-password`,
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: name,
+        },
+        emailRedirectTo: `${window.location.origin}/api/auth/callback?next=/dashboard`,
+      }
     });
 
     if (error) {
@@ -65,6 +49,7 @@ export default function LoginPortal() {
     } else {
       setView("check_email");
     }
+    
     setIsLoading(false);
   };
 
@@ -79,28 +64,37 @@ export default function LoginPortal() {
 
         <div className="text-center mb-10 relative z-10">
           <h1 className="font-heading text-3xl font-bold text-brand-white">
-            {view === "forgot_password" ? "RESET PASSWORD" : view === "check_email" ? "CHECK YOUR EMAIL" : "WELCOME BACK"}
+            {view === "signup" ? "CREATE ACCOUNT" : "CHECK YOUR EMAIL"}
           </h1>
           <p className="text-brand-white/50 text-sm mt-3">
-            {view === "forgot_password" 
-              ? "Enter your email to receive a password reset link."
-              : view === "check_email"
-                ? `We've sent a reset link to ${email || "your email"}.`
-                : "Sign in to access your dashboard."}
+            {view === "signup" 
+              ? "Join Nashik Dhol to chat with us and manage bookings."
+              : `We've sent a confirmation link to ${email || "your email"}.`}
           </p>
         </div>
 
         <div className="relative z-10">
           <AnimatePresence mode="wait">
-            {view === "login" && (
+            {view === "signup" && (
               <motion.form 
-                key="login"
+                key="signup"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
-                onSubmit={handleLogin} 
+                onSubmit={handleSignup} 
                 className="space-y-4"
               >
+                <div>
+                  <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50 block mb-2">FULL NAME</label>
+                  <input 
+                    type="text" 
+                    required
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full bg-transparent border-b border-brand-white/20 px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors" 
+                    placeholder="John Doe" 
+                  />
+                </div>
                 <div>
                   <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50 block mb-2">EMAIL ADDRESS</label>
                   <input 
@@ -113,21 +107,23 @@ export default function LoginPortal() {
                   />
                 </div>
                 <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50 block">PASSWORD</label>
-                    <button 
-                      type="button" 
-                      onClick={() => setView("forgot_password")}
-                      className="text-[10px] text-brand-white/50 hover:text-brand-white transition-colors uppercase"
-                    >
-                      Forgot Password?
-                    </button>
-                  </div>
+                  <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50 block mb-2">PASSWORD</label>
                   <input 
                     type="password" 
                     required
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    className="w-full bg-transparent border-b border-brand-white/20 px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors" 
+                    placeholder="••••••••" 
+                  />
+                </div>
+                <div>
+                  <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50 block mb-2">CONFIRM PASSWORD</label>
+                  <input 
+                    type="password" 
+                    required
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
                     className="w-full bg-transparent border-b border-brand-white/20 px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors" 
                     placeholder="••••••••" 
                   />
@@ -141,59 +137,15 @@ export default function LoginPortal() {
                   {isLoading ? (
                     <div className="w-5 h-5 border-2 border-brand-black border-t-transparent rounded-full animate-spin" />
                   ) : (
-                    <span className="uppercase text-sm">Login</span>
+                    <span className="uppercase text-sm">Create Account</span>
                   )}
                 </button>
 
                 <div className="text-center mt-6">
-                  <span className="text-xs text-brand-white/50">Don&apos;t have an account? </span>
-                  <Link href="/signup" className="text-xs text-brand-white hover:text-brand-red transition-colors font-bold uppercase tracking-wider">
-                    Create Account
+                  <span className="text-xs text-brand-white/50">Already have an account? </span>
+                  <Link href="/login" className="text-xs text-brand-white hover:text-brand-red transition-colors font-bold uppercase tracking-wider">
+                    Sign In
                   </Link>
-                </div>
-              </motion.form>
-            )}
-
-            {view === "forgot_password" && (
-              <motion.form 
-                key="forgot_password"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                onSubmit={handleForgotPassword} 
-                className="space-y-4"
-              >
-                <div>
-                  <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50 block mb-2">EMAIL ADDRESS</label>
-                  <input 
-                    type="email" 
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-transparent border-b border-brand-white/20 px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors" 
-                    placeholder="user@example.com" 
-                  />
-                </div>
-                
-                <button 
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full py-4 bg-brand-red text-brand-black font-bold tracking-[0.1em] hover:bg-brand-white transition-all duration-300 mt-6 disabled:opacity-70 flex items-center justify-center gap-3 rounded-sm"
-                >
-                  {isLoading ? (
-                    <div className="w-5 h-5 border-2 border-brand-black border-t-transparent rounded-full animate-spin" />
-                  ) : (
-                    <span className="uppercase text-sm">Send Reset Link</span>
-                  )}
-                </button>
-                <div className="text-center mt-4">
-                  <button 
-                    type="button" 
-                    onClick={() => setView("login")}
-                    className="text-xs text-brand-white/50 hover:text-brand-white transition-colors uppercase tracking-wider font-bold"
-                  >
-                    ← Back to Login
-                  </button>
                 </div>
               </motion.form>
             )}
@@ -211,12 +163,17 @@ export default function LoginPortal() {
                   </svg>
                 </div>
                 
-                <button 
-                  onClick={() => setView("login")}
-                  className="text-xs text-brand-white/50 hover:text-brand-white transition-colors uppercase tracking-wider font-bold"
+                <p className="text-sm text-brand-white/70 mb-8">
+                  Please confirm your email address by clicking the link we just sent you. 
+                  Once confirmed, you can log in to your dashboard.
+                </p>
+                
+                <Link 
+                  href="/login"
+                  className="inline-block text-xs text-brand-white/50 hover:text-brand-white transition-colors uppercase tracking-wider font-bold"
                 >
                   ← Back to Login
-                </button>
+                </Link>
               </motion.div>
             )}
           </AnimatePresence>

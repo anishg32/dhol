@@ -90,11 +90,10 @@ export default function Navbar() {
             BOOK NOW
           </a>
           <Link
-            href="/admin"
-            className="ml-4 text-xs font-bold tracking-widest text-brand-white/40 hover:text-brand-white transition-colors"
-            title="Admin Login"
+            href="/login"
+            className="ml-4 text-xs font-bold tracking-widest text-brand-white/80 hover:text-brand-white transition-colors"
           >
-            ADMIN
+            LOGIN
           </Link>
         </nav>
 
@@ -156,11 +155,11 @@ export default function Navbar() {
                   BOOK NOW
                 </a>
                 <Link
-                  href="/admin"
+                  href="/login"
                   onClick={() => setMobileMenuOpen(false)}
                   className="block w-full text-center px-8 py-3 border border-brand-white/20 text-brand-white/50 hover:text-brand-white font-bold tracking-widest text-sm rounded-sm"
                 >
-                  ADMIN LOGIN
+                  LOGIN
                 </Link>
               </motion.div>
             </nav>

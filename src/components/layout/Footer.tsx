@@ -54,6 +54,12 @@ export default function Footer() {
           </div>
         </div>
 
+        <div className="flex justify-center items-center gap-4 text-[10px] font-bold tracking-[0.2em] text-brand-white/30 uppercase mt-12 mb-6">
+          <Link href="/#contact" className="hover:text-brand-white/70 transition-colors">Support</Link>
+          <span>·</span>
+          <Link href="/admin/login" className="hover:text-brand-white/70 transition-colors">Admin Login</Link>
+        </div>
+
         <div className="text-center pt-8 border-t border-brand-white/5 text-brand-white/30 text-[10px] font-bold tracking-widest uppercase">
           &copy; {new Date().getFullYear()} {siteConfig.name}. ALL RIGHTS RESERVED.
         </div>
