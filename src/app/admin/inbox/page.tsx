@@ -1,16 +1,18 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { Trash2, CheckCircle, Mail, Phone, Clock, MailOpen, MailQuestion } from "lucide-react";
+import { Trash2, Mail, Phone, Clock, MailOpen, MailQuestion } from "lucide-react";
 import { format } from "date-fns";
 import toast from "react-hot-toast";
 
 type Message = {
   id: string;
+  userId: string | null;
   name: string;
   email: string;
   phone: string | null;
   message: string;
+  adminReply: string | null;
   isRead: boolean;
   createdAt: string;
 };
@@ -39,6 +41,7 @@ export default function InboxDashboard() {
   }, [page]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchMessages();
     const interval = setInterval(fetchMessages, 30000);
     return () => clearInterval(interval);
@@ -81,6 +84,31 @@ export default function InboxDashboard() {
       }
     } catch (error) {
       console.error("Failed to delete message", error);
+      toast.error("An error occurred");
+    }
+  };
+
+  const handleReply = async (id: string) => {
+    const replyText = (document.getElementById('replyText') as HTMLTextAreaElement)?.value;
+    if (!replyText?.trim()) return;
+    
+    try {
+      const res = await fetch(`/api/messages/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ adminReply: replyText, isRead: true }),
+      });
+      if (res.ok) {
+        setMessages(messages.map(m => m.id === id ? { ...m, adminReply: replyText, isRead: true } : m));
+        if (selectedMessage && selectedMessage.id === id) {
+          setSelectedMessage({ ...selectedMessage, adminReply: replyText, isRead: true });
+        }
+        toast.success("Reply sent to user's dashboard");
+      } else {
+        toast.error("Failed to send reply");
+      }
+    } catch (error) {
+      console.error("Failed to send reply", error);
       toast.error("An error occurred");
     }
   };
@@ -128,7 +156,14 @@ export default function InboxDashboard() {
                       {!m.isRead && <div className="w-2.5 h-2.5 rounded-full bg-brand-red mx-auto shadow-[0_0_8px_rgba(211,47,47,0.8)]"></div>}
                     </td>
                     <td className="px-6 py-4">
-                      <div className={`${!m.isRead ? 'text-brand-white' : ''}`}>{m.name}</div>
+                      <div className={`flex items-center gap-2 ${!m.isRead ? 'text-brand-white' : ''}`}>
+                        {m.name}
+                        {m.userId && (
+                          <span className="bg-brand-red text-brand-black text-[8px] font-bold px-1.5 py-0.5 rounded-sm uppercase tracking-widest">
+                            USER
+                          </span>
+                        )}
+                      </div>
                       <div className="text-brand-white/50 text-xs font-normal mt-1">{m.email}</div>
                     </td>
                     <td className="px-6 py-4">
@@ -199,7 +234,14 @@ export default function InboxDashboard() {
             {/* Header info */}
             <div>
               <div className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50 mb-2">SENDER</div>
-              <div className="font-bold text-xl mb-1">{selectedMessage.name}</div>
+              <div className="font-bold text-xl flex items-center gap-2">
+                {selectedMessage.name}
+                {selectedMessage.userId && (
+                  <span className="bg-brand-red text-brand-black text-[10px] font-bold px-2 py-1 rounded-sm uppercase tracking-widest mt-0.5">
+                    Verified User
+                  </span>
+                )}
+              </div>
               <div className="text-sm space-y-2 text-brand-white/80 mt-3">
                 <p className="flex items-center gap-2">
                   <Mail size={14} className="text-brand-white/50" /> 
@@ -230,17 +272,50 @@ export default function InboxDashboard() {
               </p>
             </div>
             
-            <div className="h-px bg-brand-white/10 w-full" />
+            {/* Admin Reply Section for Authenticated Users */}
+            {selectedMessage.userId && (
+              <>
+                <div className="h-px bg-brand-white/10 w-full" />
+                <div>
+                  <div className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50 mb-2 uppercase">Your Reply</div>
+                  {selectedMessage.adminReply ? (
+                    <p className="text-sm bg-brand-white/5 p-4 rounded-sm border border-brand-white/10 whitespace-pre-wrap leading-relaxed text-brand-white/80">
+                      {selectedMessage.adminReply}
+                    </p>
+                  ) : (
+                    <div className="space-y-3">
+                      <textarea 
+                        id="replyText"
+                        className="w-full bg-brand-charcoal border border-brand-white/10 p-3 rounded-sm text-sm focus:outline-none focus:border-brand-red min-h-[100px] transition-colors"
+                        placeholder="Type your reply to the user's dashboard here..."
+                      ></textarea>
+                      <button 
+                        onClick={() => handleReply(selectedMessage.id)}
+                        className="w-full py-3 bg-brand-red text-brand-black font-bold text-[10px] uppercase tracking-widest hover:bg-brand-white transition-colors rounded-sm"
+                      >
+                        Send Reply to User
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
+
+            {!selectedMessage.userId && (
+              <>
+                <div className="h-px bg-brand-white/10 w-full" />
+                <div>
+                  <a 
+                    href={`mailto:${selectedMessage.email}?subject=Nashik Dhol Event Enquiry&body=Hi ${selectedMessage.name},%0D%0A%0D%0A`}
+                    onClick={() => toast.success("Opening email client to reply")}
+                    className="w-full flex items-center justify-center gap-2 py-3 text-sm font-bold bg-brand-white/5 hover:bg-brand-white/10 border border-brand-white/10 rounded-sm transition-colors uppercase tracking-widest"
+                  >
+                    Reply via Email
+                  </a>
+                </div>
+              </>
+            )}
             
-            <div>
-              <a 
-                href={`mailto:${selectedMessage.email}?subject=Nashik Dhol Event Enquiry&body=Hi ${selectedMessage.name},%0D%0A%0D%0A`}
-                onClick={() => toast.success("Opening email client to reply")}
-                className="w-full flex items-center justify-center gap-2 py-3 text-sm font-bold bg-brand-white/5 hover:bg-brand-white/10 border border-brand-white/10 rounded-sm transition-colors uppercase tracking-widest"
-              >
-                Reply
-              </a>
-            </div>
           </div>
 
           <div className="mt-8 pt-6 border-t border-brand-white/10">

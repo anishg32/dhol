@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 
 export default function SignatureSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -39,27 +39,30 @@ export default function SignatureSection() {
         </div>
         
         <div className="flex flex-col items-center space-y-4 md:space-y-6">
-          {words.map((word, i) => {
-            // Adjust timings to create a staggered scroll reveal
-            const start = 0.2 + (i * 0.1);
-            const end = 0.5 + (i * 0.1);
-            
-            const y = useTransform(scrollYProgress, [start, end], [100, 0]);
-            const opacity = useTransform(scrollYProgress, [start, end], [0, 1]);
-
-            return (
-              <div key={word} className="overflow-hidden py-2">
-                <motion.div 
-                  style={{ y, opacity }}
-                  className="font-heading text-6xl md:text-8xl lg:text-[9rem] font-bold text-brand-white leading-none hover:text-brand-red transition-colors duration-500 cursor-default"
-                >
-                  {word}
-                </motion.div>
-              </div>
-            );
-          })}
+          {words.map((word, i) => (
+            <Word key={word} word={word} index={i} scrollYProgress={scrollYProgress} />
+          ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function Word({ word, index, scrollYProgress }: { word: string, index: number, scrollYProgress: MotionValue<number> }) {
+  const start = 0.2 + (index * 0.1);
+  const end = 0.5 + (index * 0.1);
+  
+  const y = useTransform(scrollYProgress, [start, end], [100, 0]);
+  const opacity = useTransform(scrollYProgress, [start, end], [0, 1]);
+
+  return (
+    <div className="overflow-hidden py-2">
+      <motion.div 
+        style={{ y, opacity }}
+        className="font-heading text-6xl md:text-8xl lg:text-[9rem] font-bold text-brand-white leading-none hover:text-brand-red transition-colors duration-500 cursor-default"
+      >
+        {word}
+      </motion.div>
+    </div>
   );
 }

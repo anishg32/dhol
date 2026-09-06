@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { Search, RefreshCw, Trash2, CheckCircle, XCircle, Clock } from "lucide-react";
+import { Search, RefreshCw, Trash2 } from "lucide-react";
 import { format } from "date-fns";
 
 type Booking = {
@@ -49,6 +49,7 @@ export default function AdminDashboard() {
   }, [page, search, statusFilter]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchBookings();
     
     // Polling every 30 seconds for new bookings

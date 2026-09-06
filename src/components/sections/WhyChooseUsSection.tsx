@@ -52,7 +52,7 @@ export default function WhyChooseUsSection() {
                 <span className="text-brand-red">BIG MOMENTS.</span>
               </h2>
               <p className="text-brand-white/70 text-lg">
-                We don't just play instruments; we create an atmosphere. Discover what makes Nashik Dhol the premier choice for your next premium event.
+                We don&apos;t just play instruments; we create an atmosphere. Discover what makes Nashik Dhol the premier choice for your next premium event.
               </p>
             </div>
           </div>

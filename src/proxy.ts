@@ -15,7 +15,7 @@ export default async function proxy(request: NextRequest) {
           return request.cookies.getAll()
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value))
+          cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value))
           supabaseResponse = NextResponse.next({
             request,
           })
@@ -30,7 +30,7 @@ export default async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
   const method = request.method
 
-  const isAdminPage = pathname.startsWith('/admin') && pathname !== '/admin/login'
+  const isAdminPage = pathname.startsWith('/admin')
   const isAdminApi = 
     (pathname.startsWith('/api/messages') && method !== 'POST' && pathname !== '/api/messages/unread-count') ||
     (pathname === '/api/messages/unread-count') ||
@@ -48,7 +48,7 @@ export default async function proxy(request: NextRequest) {
       }
       // no user, redirect to login
       const url = request.nextUrl.clone()
-      url.pathname = '/admin/login'
+      url.pathname = '/login'
       return NextResponse.redirect(url)
     }
 
@@ -64,7 +64,7 @@ export default async function proxy(request: NextRequest) {
       
       // Redirect for pages
       const url = request.nextUrl.clone()
-      url.pathname = '/admin/login'
+      url.pathname = '/login'
       url.searchParams.set('error', 'unauthorized')
       return NextResponse.redirect(url)
     }

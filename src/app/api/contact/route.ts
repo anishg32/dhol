@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { createClient } from "@/utils/supabase/server";
 
 // Simple in-memory rate limiting (Note: resets on server restart/serverless cold boot)
 const rateLimitMap = new Map<string, { count: number, resetTime: number }>();
@@ -7,7 +8,7 @@ const rateLimitMap = new Map<string, { count: number, resetTime: number }>();
 function isRateLimited(ip: string) {
   const now = Date.now();
   const windowMs = 15 * 60 * 1000; // 15 minutes
-  const maxRequests = 5; // 5 messages per 15 mins
+  const maxRequests = 20; // Increased to 20 for chat usage
 
   const record = rateLimitMap.get(ip);
   if (!record) {
@@ -30,7 +31,6 @@ function isRateLimited(ip: string) {
 
 export async function POST(request: Request) {
   try {
-    // Basic IP extraction (works for some setups, but headers vary in production)
     const ip = request.headers.get("x-forwarded-for") || "unknown-ip";
     
     if (isRateLimited(ip)) {
@@ -41,7 +41,6 @@ export async function POST(request: Request) {
     }
 
     const data = await request.json();
-
     const { name, email, phone, message } = data;
 
     if (!name || !email || !message) {
@@ -51,7 +50,6 @@ export async function POST(request: Request) {
       );
     }
 
-    // Basic length validations to prevent abuse
     if (name.length > 100 || email.length > 100 || message.length > 2000) {
       return NextResponse.json(
         { error: "Input exceeds maximum allowed length" },
@@ -59,8 +57,13 @@ export async function POST(request: Request) {
       );
     }
 
+    // Check if the user is logged in
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+
     const newMessage = await prisma.message.create({
       data: {
+        userId: user ? user.id : null,
         name: name.trim(),
         email: email.trim(),
         phone: phone ? phone.trim().substring(0, 20) : null,

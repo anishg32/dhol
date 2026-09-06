@@ -101,7 +101,7 @@ export async function GET(request: Request) {
 
     const skip = (page - 1) * limit;
 
-    const where: any = {};
+    const where: import("@prisma/client").Prisma.BookingWhereInput = {};
     
     if (search) {
       where.OR = [

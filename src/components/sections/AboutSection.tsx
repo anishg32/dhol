@@ -12,7 +12,7 @@ export default function AboutSection() {
             <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-brand-white leading-tight mb-8">
               <span className="block">MORE THAN A</span>
               <span className="block text-brand-red">PERFORMANCE.</span>
-              <span className="block">IT'S AN</span>
+              <span className="block">IT&apos;S AN</span>
               <span className="block">EXPERIENCE.</span>
             </h2>
             

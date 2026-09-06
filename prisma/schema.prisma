@@ -29,11 +29,13 @@ model Booking {
 }
 
 model Message {
-  id        String   @id @default(cuid())
-  name      String
-  email     String
-  phone     String?
-  message   String
-  isRead    Boolean  @default(false)
-  createdAt DateTime @default(now())
+  id          String   @id @default(cuid())
+  userId      String?  // References Supabase auth.users ID
+  name        String
+  email       String
+  phone       String?
+  message     String
+  adminReply  String?  // Admin's reply text
+  isRead      Boolean  @default(false)
+  createdAt   DateTime @default(now())
 }

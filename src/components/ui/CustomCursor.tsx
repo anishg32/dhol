@@ -12,6 +12,7 @@ export default function CustomCursor() {
   useEffect(() => {
     // Detect touch devices
     if ("ontouchstart" in window || navigator.maxTouchPoints > 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsTouchDevice(true);
       return;
     }

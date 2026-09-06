@@ -29,7 +29,10 @@ export async function PATCH(
     const data = await request.json();
     const updated = await prisma.message.update({
       where: { id: resolvedParams.id },
-      data: { isRead: data.isRead },
+      data: { 
+        isRead: data.isRead !== undefined ? data.isRead : undefined,
+        adminReply: data.adminReply !== undefined ? data.adminReply : undefined
+      },
     });
     return NextResponse.json(updated);
   } catch (error) {

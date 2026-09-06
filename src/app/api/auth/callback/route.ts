@@ -11,10 +11,18 @@ export async function GET(request: Request) {
     const { error } = await supabase.auth.exchangeCodeForSession(code)
     
     if (!error) {
-      return NextResponse.redirect(`${origin}${next}`)
+      const { data: { user } } = await supabase.auth.getUser()
+      const authorizedEmail = process.env.AUTHORIZED_ADMIN_EMAIL || "teamaliyanz@gmail.com"
+      
+      if (user && user.email === authorizedEmail) {
+        return NextResponse.redirect(`${origin}${next}`)
+      } else {
+        await supabase.auth.signOut()
+        return NextResponse.redirect(`${origin}/login?error=unauthorized`)
+      }
     }
   }
 
   // return the user to an error page with instructions
-  return NextResponse.redirect(`${origin}/admin/login?error=auth-callback-failed`)
+  return NextResponse.redirect(`${origin}/login?error=auth-callback-failed`)
 }

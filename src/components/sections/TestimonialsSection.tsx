@@ -21,7 +21,7 @@ export default function TestimonialsSection() {
         </div>
 
         <div className="flex overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-12 -mx-6 px-6 lg:mx-0 lg:px-0 gap-6 animate-on-scroll">
-          {siteConfig.testimonials.map((testimonial, idx) => (
+          {siteConfig.testimonials.map((testimonial) => (
             <div 
               key={testimonial.id}
               className="snap-center shrink-0 w-[85vw] md:w-[60vw] lg:w-[40vw] bg-brand-charcoal p-10 md:p-12 border border-brand-white/5 rounded-sm hover:-translate-y-2 transition-transform duration-500 shadow-xl relative"
@@ -33,7 +33,7 @@ export default function TestimonialsSection() {
                 ))}
               </div>
               <p className="text-brand-white/90 text-lg md:text-xl italic mb-10 font-serif leading-relaxed relative z-10">
-                "{testimonial.quote}"
+                &quot;{testimonial.quote}&quot;
               </p>
               <div className="border-t border-brand-white/10 pt-6 relative z-10 flex items-center justify-between">
                 <div>

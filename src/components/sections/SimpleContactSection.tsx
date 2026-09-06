@@ -34,7 +34,7 @@ export default function SimpleContactSection() {
         const responseData = await res.json();
         setError(responseData.error || "Failed to send message.");
       }
-    } catch (err) {
+    } catch {
       setError("Unable to send message right now. Please try again.");
     } finally {
       setIsLoading(false);
@@ -72,7 +72,7 @@ export default function SimpleContactSection() {
                   Message Sent
                 </h3>
                 <p className="text-brand-white/70 mb-6">
-                  Thank you for reaching out! We'll reply to your email soon.
+                  Thank you for reaching out! We&apos;ll reply to your email soon.
                 </p>
                 <button 
                   onClick={() => setIsSuccess(false)}

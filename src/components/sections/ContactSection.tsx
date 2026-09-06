@@ -54,7 +54,7 @@ export default function ContactSection() {
       } else {
         setServerError(responseData.error || "Something went wrong.");
       }
-    } catch (error) {
+    } catch {
       setServerError("Unable to submit your booking right now. Please try again.");
     }
   };
