@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { createClient } from "@/utils/supabase/server";
 
 // Simple in-memory rate limiting (Note: resets on server restart/serverless cold boot)
 const rateLimitMap = new Map<string, { count: number, resetTime: number }>();
@@ -57,13 +56,9 @@ export async function POST(request: Request) {
       );
     }
 
-    // Check if the user is logged in
-    const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-
     const newMessage = await prisma.message.create({
       data: {
-        userId: user ? user.id : null,
+        userId: null,
         name: name.trim(),
         email: email.trim(),
         phone: phone ? phone.trim().substring(0, 20) : null,

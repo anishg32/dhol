@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { createClient } from "@/utils/supabase/client";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
@@ -12,31 +11,32 @@ export default function AdminLoginPortal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   
-  const supabase = createClient();
   const router = useRouter();
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get("error") === "unauthorized") {
-      toast.error("Access Denied: This account is not authorized to view the admin area.");
-      window.history.replaceState({}, document.title, "/admin/login");
-    }
-  }, []);
 
   const handleAdminSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      toast.error(error.message);
+    try {
+      const res = await fetch("/api/admin-auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      
+      const data = await res.json();
+      
+      if (!res.ok) {
+        toast.error(data.error || "Login failed");
+        setIsLoading(false);
+      } else {
+        toast.success("Login successful");
+        router.push("/admin");
+        router.refresh();
+      }
+    } catch (error) {
+      toast.error("An error occurred during login");
       setIsLoading(false);
-    } else {
-      router.push("/admin");
     }
   };
 

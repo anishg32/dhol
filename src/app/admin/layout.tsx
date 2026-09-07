@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { LogOut, Calendar, Inbox } from "lucide-react";
 import { useState, useEffect } from "react";
-import { createClient } from "@/utils/supabase/client";
 
 export default function AdminLayout({
   children,
@@ -14,8 +13,6 @@ export default function AdminLayout({
   const pathname = usePathname();
   const router = useRouter();
   const [unreadCount, setUnreadCount] = useState(0);
-  const supabase = createClient();
-
   useEffect(() => {
     if (pathname === "/admin/login") return;
 
@@ -42,9 +39,13 @@ export default function AdminLayout({
   }
 
   const handleLogout = async () => {
-    await supabase.auth.signOut();
-    router.push("/admin/login");
-    router.refresh();
+    try {
+      await fetch("/api/admin-auth", { method: "DELETE" });
+      router.push("/admin/login");
+      router.refresh();
+    } catch (e) {
+      console.error("Logout failed", e);
+    }
   };
 
   return (

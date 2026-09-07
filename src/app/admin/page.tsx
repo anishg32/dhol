@@ -212,9 +212,12 @@ export default function AdminDashboard() {
         {/* Details Sidebar */}
         {selectedBooking && (
           <div className="w-full lg:w-[400px] shrink-0 bg-brand-black border border-brand-white/10 rounded-sm p-6 flex flex-col h-[calc(100vh-8rem)] sticky top-24 overflow-y-auto shadow-2xl">
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="font-heading text-xl font-bold">Booking Details</h3>
-              <button onClick={() => setSelectedBooking(null)} className="lg:hidden text-brand-white/50 hover:text-brand-white">
+            <div className="flex justify-between items-center mb-6 pb-4 border-b border-brand-white/10">
+              <div>
+                <h3 className="font-heading text-xl font-bold tracking-wider">Booking Details</h3>
+                <p className="text-[10px] text-brand-white/50 tracking-[0.2em] uppercase mt-1">Manage this request</p>
+              </div>
+              <button onClick={() => setSelectedBooking(null)} className="p-2 rounded-sm bg-brand-white/5 hover:bg-brand-white/10 text-brand-white/70 hover:text-brand-white transition-colors">
                 ✕
               </button>
             </div>
@@ -233,9 +236,9 @@ export default function AdminDashboard() {
 
               {/* Info blocks */}
               <div>
-                <div className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50 mb-1">BOOKING ID</div>
-                <div className="font-mono">{selectedBooking.bookingId}</div>
-                <div className="text-xs text-brand-white/40 mt-1">Received {format(new Date(selectedBooking.createdAt), "dd MMM yyyy, HH:mm")}</div>
+                <div className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50 mb-1">BOOKING REFERENCE</div>
+                <div className="font-mono text-brand-white bg-brand-white/5 inline-block px-2 py-1 rounded-sm mt-1">{selectedBooking.bookingId}</div>
+                <div className="text-xs text-brand-white/40 mt-2">Received {format(new Date(selectedBooking.createdAt), "dd MMM yyyy, HH:mm")}</div>
               </div>
 
               <div className="h-px bg-brand-white/10 w-full" />
@@ -279,9 +282,9 @@ export default function AdminDashboard() {
               <div className="h-px bg-brand-white/10 w-full" />
 
               <div>
-                <div className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50 mb-2">REQUIREMENTS</div>
-                <p className="text-sm bg-brand-charcoal p-3 rounded-sm border border-brand-white/5">
-                  {selectedBooking.requirements || <span className="text-brand-white/30 italic">No additional requirements provided.</span>}
+                <div className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50 mb-2">SPECIAL REQUIREMENTS</div>
+                <p className="text-sm bg-brand-charcoal p-4 rounded-sm border border-brand-white/5 leading-relaxed">
+                  {selectedBooking.requirements || <span className="text-brand-white/30 italic">No additional requirements provided by the customer.</span>}
                 </p>
               </div>
               
