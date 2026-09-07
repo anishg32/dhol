@@ -6,7 +6,7 @@ export const siteConfig = {
   contact: {
     whatsapp: "+918903287741",
     phone: "+918903287741",
-    email: "booking@teamaliyanz.com", // Replace with real email
+    email: "trippyman2006@gmail.com",
     location: "R.C Street, Puthukkadai, KK Dist",
   },
   social: {

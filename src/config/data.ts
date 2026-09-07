@@ -4,7 +4,7 @@ export const BRAND = {
   description: "Premium Team Aliyanz performances for unforgettable celebrations and events.",
   phone: "+91 98765 43210",
   whatsapp: "+91 98765 43210",
-  email: "booking@teamalyaan.example.com",
+  email: "trippyman2006@gmail.com",
   location: "Mumbai, Maharashtra",
   socials: {
     instagram: "https://instagram.com/aliyan_beatz_ofl",
