@@ -40,20 +40,28 @@ export default function ContactSection() {
   const onSubmit = async (data: BookingFormData) => {
     setServerError(null);
     try {
-      const res = await fetch("/api/bookings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+      const message = `*NEW BOOKING ENQUIRY*
+Name: ${data.customerName}
+Mobile: ${data.mobileNumber}
+WhatsApp: ${data.whatsappNumber}
+Email: ${data.email}
+Event: ${data.eventType}
+Date: ${data.eventDate}
+Time: ${data.eventStartTime} - ${data.eventEndTime}
+Location: ${data.eventLocation}
+Crowd: ${data.expectedCrowd}
+Requirements: ${data.requirements || 'None'}
+`;
 
-      const responseData = await res.json();
+      const whatsappNumber = siteConfig.contact.whatsapp.replace(/[^0-9]/g, '');
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
-      if (res.ok) {
-        setBookingId(responseData.bookingId);
-        setIsSuccess(true);
-      } else {
-        setServerError(responseData.error || "Something went wrong.");
-      }
+      window.open(whatsappUrl, '_blank');
+      
+      const tempId = `REQ-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+      setBookingId(tempId);
+      setIsSuccess(true);
     } catch {
       setServerError("Unable to submit your booking right now. Please try again.");
     }
