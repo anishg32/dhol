@@ -47,7 +47,7 @@ export default function WhyChooseUsSection() {
                   WHY CHOOSE US
                 </span>
               </div>
-              <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-brand-white leading-tight mb-6">
+              <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-brand-white leading-tight mb-6">
                 BUILT FOR <br />
                 <span className="text-brand-red">BIG MOMENTS.</span>
               </h2>

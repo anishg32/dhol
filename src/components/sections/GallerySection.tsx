@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, ZoomIn } from "lucide-react";
+import Image from "next/image";
 
 const GALLERY_IMAGES = [
   "/images/group-standing.jpg",
@@ -25,7 +26,7 @@ export default function GallerySection() {
               PORTFOLIO
             </span>
           </div>
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-brand-white">
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-brand-white">
             VISUAL <span className="text-brand-red">EXPERIENCE</span>
           </h2>
         </div>
@@ -46,11 +47,13 @@ export default function GallerySection() {
                   </span>
                 </div>
               </div>
-              <img 
+              <Image 
                 src={src} 
                 alt={`Gallery image ${idx + 1}`} 
+                width={800}
+                height={800}
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110 grayscale hover:grayscale-0"
-                loading="lazy"
               />
             </div>
           ))}
@@ -70,19 +73,26 @@ export default function GallerySection() {
             <button 
               className="absolute top-6 right-6 text-brand-white/50 hover:text-brand-red transition-colors z-[101]"
               onClick={() => setSelectedImage(null)}
+              aria-label="Close"
             >
               <X size={32} />
             </button>
-            <motion.img
+            <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              src={selectedImage}
-              alt="Gallery Lightbox"
-              className="max-w-full max-h-full object-contain shadow-2xl rounded-sm"
+              className="relative w-[95vw] h-[90dvh]"
               onClick={(e) => e.stopPropagation()}
-            />
+            >
+              <Image
+                src={selectedImage}
+                alt="Gallery Lightbox"
+                fill
+                sizes="100vw"
+                className="object-contain shadow-2xl rounded-sm"
+              />
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

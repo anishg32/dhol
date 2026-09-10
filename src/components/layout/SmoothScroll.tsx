@@ -14,7 +14,9 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
       gestureOrientation: "vertical",
       smoothWheel: true,
       wheelMultiplier: 1,
-      touchMultiplier: 2,
+      // More natural touch behavior for mobile devices
+      syncTouch: false,
+      touchMultiplier: 1.2,
     });
 
     function raf(time: number) {
@@ -41,31 +43,15 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
       }
     );
 
-    // Initial query
-    const animatedElements = document.querySelectorAll('.animate-on-scroll');
-    animatedElements.forEach((el) => observer.observe(el));
-
-    // Also observe dynamically added elements (mutation observer)
-    const mutationObserver = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        mutation.addedNodes.forEach((node) => {
-          if (node instanceof HTMLElement) {
-            if (node.classList.contains('animate-on-scroll')) {
-              observer.observe(node);
-            }
-            const children = node.querySelectorAll('.animate-on-scroll');
-            children.forEach((el) => observer.observe(el));
-          }
-        });
-      });
-    });
-
-    mutationObserver.observe(document.body, { childList: true, subtree: true });
+    // Initial query for elements that exist on mount
+    setTimeout(() => {
+      const animatedElements = document.querySelectorAll('.animate-on-scroll');
+      animatedElements.forEach((el) => observer.observe(el));
+    }, 100);
 
     return () => {
       lenisRef.current?.destroy();
       observer.disconnect();
-      mutationObserver.disconnect();
     };
   }, []);
 

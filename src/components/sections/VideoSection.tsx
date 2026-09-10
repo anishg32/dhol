@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Play, Volume2, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const REELS = [
   { id: 1, title: "Wedding Baraat", poster: "/images/group-standing.jpg" },
@@ -23,7 +24,7 @@ export default function VideoSection() {
               LIVE ACTION
             </span>
           </div>
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-brand-white">
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-brand-white">
             WATCH THE <span className="text-brand-red">ENERGY</span>
           </h2>
         </div>
@@ -36,11 +37,12 @@ export default function VideoSection() {
               style={{ animationDelay: `${idx * 100}ms` }}
               onClick={() => setActiveVideo(reel.id)}
             >
-              <img 
+              <Image 
                 src={reel.poster} 
-                alt={reel.title} 
-                className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-700 grayscale group-hover:grayscale-0"
-                loading="lazy"
+                alt={reel.title}
+                fill
+                sizes="(max-width: 768px) 320px, 320px"
+                className="object-cover scale-105 group-hover:scale-100 transition-transform duration-700 grayscale group-hover:grayscale-0"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/20 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-300" />
               
@@ -81,9 +83,17 @@ export default function VideoSection() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="w-full max-w-sm aspect-[9/16] bg-brand-charcoal rounded-xl border border-brand-white/10 flex items-center justify-center overflow-hidden relative shadow-[0_0_50px_rgba(211,47,47,0.15)]"
+              className="w-[90vw] max-w-sm aspect-[9/16] max-h-[85dvh] bg-brand-charcoal rounded-xl border border-brand-white/10 flex items-center justify-center overflow-hidden relative shadow-[0_0_50px_rgba(211,47,47,0.15)]"
             >
-              <img src={REELS.find(r => r.id === activeVideo)?.poster} alt="Poster" className="absolute inset-0 w-full h-full object-cover opacity-20 blur-sm" />
+              {REELS.find(r => r.id === activeVideo)?.poster && (
+                <Image 
+                  src={REELS.find(r => r.id === activeVideo)!.poster} 
+                  alt="Poster" 
+                  fill
+                  sizes="(max-width: 768px) 90vw, 384px"
+                  className="object-cover opacity-20 blur-sm" 
+                />
+              )}
               <div className="relative z-10 flex flex-col items-center">
                 <Play size={48} className="text-brand-white/30 mb-4" />
                 <p className="text-brand-white/50 text-sm tracking-widest uppercase font-bold">Video Player Placeholder</p>

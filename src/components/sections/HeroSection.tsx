@@ -2,69 +2,86 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import Image from "next/image";
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
-    // Cinematic intro animation
+    // Cinematic intro animation with matchMedia for performance
+    const mm = gsap.matchMedia();
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline();
       
-      tl.to(".hero-overlay", {
-        opacity: 0,
-        duration: 2.5,
-        ease: "power2.inOut",
-      })
-      .from(".hero-label", {
-        y: 20,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-      }, "-=1.5")
-      .from(".hero-title-line", {
-        y: 100,
-        opacity: 0,
-        duration: 1.5,
-        stagger: 0.2,
-        ease: "power4.out",
-      }, "-=1.2")
-      .from(".hero-subtitle", {
-        opacity: 0,
-        y: 20,
-        duration: 1,
-      }, "-=0.8")
-      .from(".hero-cta", {
-        opacity: 0,
-        y: 20,
-        duration: 1,
-        stagger: 0.2,
-      }, "-=0.6");
-      
-      // Continuous rhythmic animation for the red text
-      gsap.to(".hero-red-text", {
-        scale: 1.05,
-        textShadow: "0 0 40px rgba(211, 47, 47, 0.6)",
-        duration: 1,
-        yoyo: true,
-        repeat: -1,
-        ease: "sine.inOut",
-        delay: 2.5
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const tl = gsap.timeline();
+        
+        tl.to(".hero-overlay", {
+          opacity: 0,
+          duration: 2.5,
+          ease: "power2.inOut",
+        })
+        .from(".hero-label", {
+          y: 20,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+        }, "-=1.5")
+        .from(".hero-title-line", {
+          y: 100,
+          opacity: 0,
+          duration: 1.5,
+          stagger: 0.2,
+          ease: "power4.out",
+        }, "-=1.2")
+        .from(".hero-subtitle", {
+          opacity: 0,
+          y: 20,
+          duration: 1,
+        }, "-=0.8")
+        .from(".hero-cta", {
+          opacity: 0,
+          y: 20,
+          duration: 1,
+          stagger: 0.2,
+        }, "-=0.6");
+        
+        // Continuous rhythmic animation for the red text
+        gsap.to(".hero-red-text", {
+          scale: 1.05,
+          textShadow: "0 0 40px rgba(211, 47, 47, 0.6)",
+          duration: 1,
+          yoyo: true,
+          repeat: -1,
+          ease: "sine.inOut",
+          delay: 2.5
+        });
       });
+
+      mm.add("(prefers-reduced-motion: reduce)", () => {
+        gsap.set(".hero-overlay", { opacity: 0 });
+      });
+      
     }, containerRef);
     
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+      mm.revert();
+    };
   }, []);
 
   return (
-    <section ref={containerRef} className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-brand-black" id="home">
+    <section ref={containerRef} className="relative min-h-[100dvh] w-full flex items-center justify-center overflow-hidden bg-brand-black" id="home">
       {/* Background Image / Video with Parallax */}
       <div className="absolute inset-0 z-0 animate-parallax">
         <div className="absolute inset-0 bg-gradient-to-b from-brand-black/90 via-brand-black/60 to-brand-black/95 z-10" />
-        <img 
+        <Image 
           src="/images/hero-bg.jpg" 
           alt="Premium Nashik Dhol Performance" 
-          className="w-full h-full object-cover object-center scale-110 animate-[slow-pan_40s_linear_infinite_alternate]"
+          fill
+          priority
+          fetchPriority="high"
+          sizes="100vw"
+          className="object-cover object-center scale-110 animate-[slow-pan_40s_linear_infinite_alternate]"
         />
         {/* Dust Particles overlay placeholder */}
         <div className="absolute inset-0 opacity-20 mix-blend-screen bg-[url('/images/noise.png')] z-10 pointer-events-none" />
@@ -81,17 +98,19 @@ export default function HeroSection() {
           </span>
         </div>
         
-        <div className="overflow-hidden mb-2">
-          <h1 className="hero-title-line font-heading text-5xl md:text-7xl lg:text-8xl md:tracking-[-0.02em] font-bold text-brand-white leading-tight md:leading-none">
-            PREMIUM LIVE
-          </h1>
-        </div>
-        <div className="overflow-hidden mb-8">
-          <h1 className="hero-title-line font-heading text-5xl md:text-7xl lg:text-8xl md:tracking-[-0.02em] font-bold text-brand-white leading-tight md:leading-none">
-            <span className="hero-red-text text-brand-red inline-block origin-center mr-4 md:mr-6">DHOL</span> 
-            PERFORMANCE
-          </h1>
-        </div>
+        <h1 className="flex flex-col items-center">
+          <div className="overflow-hidden mb-2">
+            <span className="hero-title-line block font-heading text-4xl sm:text-5xl md:text-7xl lg:text-8xl md:tracking-[-0.02em] font-bold text-brand-white leading-tight md:leading-none">
+              PREMIUM LIVE
+            </span>
+          </div>
+          <div className="overflow-hidden mb-8">
+            <span className="hero-title-line block font-heading text-4xl sm:text-5xl md:text-7xl lg:text-8xl md:tracking-[-0.02em] font-bold text-brand-white leading-tight md:leading-none">
+              <span className="hero-red-text text-brand-red inline-block origin-center mr-2 sm:mr-4 md:mr-6">DHOL</span> 
+              PERFORMANCE
+            </span>
+          </div>
+        </h1>
 
         <p className="hero-subtitle text-base md:text-xl text-brand-white/80 max-w-2xl font-medium tracking-wider mb-12">
           Powerful rhythms. Unforgettable celebrations.

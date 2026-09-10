@@ -48,7 +48,7 @@ Feedback: ${feedback}
               TESTIMONIALS
             </span>
           </div>
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-brand-white mb-8">
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-brand-white mb-8">
             THE CROWD <span className="text-brand-red">SPEAKS.</span>
           </h2>
           
@@ -98,7 +98,7 @@ Feedback: ${feedback}
               initial={{ scale: 0.95, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.95, y: 20 }}
-              className="bg-brand-charcoal border border-brand-white/10 p-8 w-full max-w-lg relative max-h-[90vh] overflow-y-auto"
+              className="bg-brand-charcoal border border-brand-white/10 p-8 w-[95vw] sm:max-w-lg relative max-h-[90dvh] overflow-y-auto"
             >
               <button 
                 onClick={() => setIsModalOpen(false)}

@@ -17,6 +17,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: siteConfig.name,
   description: siteConfig.description,
   openGraph: {
@@ -48,6 +49,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${cinzel.variable} ${inter.variable} h-full antialiased dark`}
     >
       <body className="min-h-full flex flex-col bg-brand-black text-brand-white selection:bg-brand-red/30 pb-[64px] md:pb-0">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "PerformingGroup",
+              "name": siteConfig.name,
+              "url": siteConfig.url,
+              "telephone": siteConfig.contact.phone,
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": siteConfig.contact.location,
+                "addressCountry": "IN"
+              },
+              "sameAs": [
+                siteConfig.social.instagram,
+                siteConfig.social.youtube
+              ]
+            })
+          }}
+        />
         {children}
         <Toaster 
           position="bottom-right"

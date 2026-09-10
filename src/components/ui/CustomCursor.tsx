@@ -52,9 +52,10 @@ export default function CustomCursor() {
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 w-4 h-4 bg-brand-red rounded-full pointer-events-none z-[100] mix-blend-difference"
+        className="custom-cursor-element fixed top-0 left-0 w-4 h-4 bg-brand-red rounded-full pointer-events-none z-[100] mix-blend-difference"
         animate={{
           x: mousePosition.x - 8,
+
           y: mousePosition.y - 8,
           scale: isHovering ? (hoverText ? 4 : 2) : 1,
           opacity: 1
@@ -63,8 +64,9 @@ export default function CustomCursor() {
       />
       {hoverText && (
         <motion.div
-          className="fixed top-0 left-0 pointer-events-none z-[101] text-[8px] font-bold tracking-widest text-brand-black flex items-center justify-center w-32 h-32"
+          className="custom-cursor-element fixed top-0 left-0 pointer-events-none z-[101] text-[8px] font-bold tracking-widest text-brand-black flex items-center justify-center w-32 h-32"
           animate={{
+
             x: mousePosition.x - 64,
             y: mousePosition.y - 64,
             opacity: isHovering ? 1 : 0

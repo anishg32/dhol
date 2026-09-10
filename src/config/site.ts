@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Nashik Dhol | Premium Live Dhol Performance",
   description: "Experience powerful Nashik Dhol performances for weddings, baraats, festivals, college events, corporate celebrations and special occasions.",
-  url: "https://teamaliyanz.com", // Replace with real URL
+  url: "https://alyanbeatz.art",
   ogImage: "/images/og-image.jpg",
   contact: {
     whatsapp: "+918903287741",

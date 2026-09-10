@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import Image from "next/image";
 
 export default function SignatureSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -14,15 +15,20 @@ export default function SignatureSection() {
   const words = ["BEAT.", "ENERGY.", "TRADITION.", "CELEBRATION."];
 
   return (
-    <section ref={containerRef} id="experience" className="py-40 bg-brand-black relative flex flex-col items-center justify-center overflow-hidden border-y border-brand-white/5 min-h-screen">
+    <section ref={containerRef} id="experience" className="py-40 bg-brand-black relative flex flex-col items-center justify-center overflow-hidden border-y border-brand-white/5 min-h-[100dvh]">
       <div className="absolute inset-0 z-0">
-        <motion.img 
+        <motion.div 
           style={{ y: useTransform(scrollYProgress, [0, 1], [-100, 100]) }}
-          src="/images/performance.jpg" 
-          alt="Signature Performance" 
-          className="w-full h-[120%] object-cover opacity-20 grayscale origin-top"
-          loading="lazy"
-        />
+          className="absolute inset-0 w-full h-[120%] origin-top -top-[10%]"
+        >
+          <Image 
+            src="/images/performance.jpg" 
+            alt="Signature Performance" 
+            fill
+            sizes="(max-width: 1024px) 100vw, 100vw"
+            className="object-cover opacity-20 grayscale"
+          />
+        </motion.div>
         <div className="absolute inset-0 bg-brand-black/70 mix-blend-multiply" />
       </div>
 
@@ -59,7 +65,7 @@ function Word({ word, index, scrollYProgress }: { word: string, index: number, s
     <div className="overflow-hidden py-2">
       <motion.div 
         style={{ y, opacity }}
-        className="font-heading text-6xl md:text-8xl lg:text-[9rem] font-bold text-brand-white leading-none hover:text-brand-red transition-colors duration-500 cursor-default"
+        className="font-heading text-5xl sm:text-6xl md:text-8xl lg:text-[9rem] font-bold text-brand-white leading-none hover:text-brand-red transition-colors duration-500 cursor-default"
       >
         {word}
       </motion.div>

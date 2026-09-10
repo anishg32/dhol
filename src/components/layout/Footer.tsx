@@ -4,7 +4,7 @@ import { FaInstagram, FaYoutube } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-black py-20 border-t border-brand-white/5 relative overflow-hidden">
+    <footer className="bg-brand-black pt-20 pb-32 md:pb-20 border-t border-brand-white/5 relative overflow-hidden pb-safe">
       {/* Background Accent */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand-red/5 blur-[120px] rounded-full pointer-events-none" />
 
@@ -38,10 +38,10 @@ export default function Footer() {
           <div className="flex flex-col items-center md:items-start">
             <h3 className="font-bold tracking-widest mb-6 text-sm text-brand-white/50">CONNECT</h3>
             <div className="flex space-x-6">
-              <a href={siteConfig.social.instagram} target="_blank" rel="noreferrer" className="text-brand-white/70 hover:text-brand-red transition-transform hover:scale-110">
+              <a href={siteConfig.social.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" className="text-brand-white/70 hover:text-brand-red transition-transform hover:scale-110">
                 <FaInstagram size={24} />
               </a>
-              <a href={siteConfig.social.youtube} target="_blank" rel="noreferrer" className="text-brand-white/70 hover:text-brand-red transition-transform hover:scale-110">
+              <a href={siteConfig.social.youtube} target="_blank" rel="noreferrer" aria-label="YouTube" className="text-brand-white/70 hover:text-brand-red transition-transform hover:scale-110">
                 <FaYoutube size={24} />
               </a>
             </div>

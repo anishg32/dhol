@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Play, X } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 export default function PerformanceShowcaseSection() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -12,7 +13,7 @@ export default function PerformanceShowcaseSection() {
     <section id="performances" className="relative bg-brand-black overflow-hidden py-32">
       <div className="container mx-auto px-6 lg:px-12 relative z-20">
         <div className="max-w-4xl mx-auto text-center mb-16 animate-on-scroll">
-          <h2 className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold text-brand-white mb-6 uppercase tracking-tight">
+          <h2 className="font-heading text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-brand-white mb-6 uppercase tracking-tight">
             FEEL THE <span className="text-brand-red">RHYTHM</span>
           </h2>
           <p className="text-xl md:text-2xl text-brand-white/80 font-medium">
@@ -25,11 +26,12 @@ export default function PerformanceShowcaseSection() {
           onClick={() => setIsPlaying(true)}
           className="relative w-full aspect-video md:aspect-[21/9] rounded-lg overflow-hidden group cursor-pointer animate-on-scroll shadow-[0_20px_50px_rgba(211,47,47,0.15)] ring-1 ring-brand-white/10"
         >
-          <img 
+          <Image 
             src="/images/hero-bg.jpg" 
             alt="Performance Video Thumbnail" 
-            className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-1000 ease-out grayscale group-hover:grayscale-0"
-            loading="lazy"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1200px"
+            className="object-cover scale-105 group-hover:scale-100 transition-transform duration-1000 ease-out grayscale group-hover:grayscale-0"
           />
           <div className="absolute inset-0 bg-brand-black/60 group-hover:bg-brand-black/30 transition-colors duration-500 flex flex-col items-center justify-center">
             
@@ -46,8 +48,8 @@ export default function PerformanceShowcaseSection() {
         {/* Statistics below video */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-24 animate-on-scroll">
           {siteConfig.stats.map((stat, idx) => (
-            <div key={idx} className="text-center border-l border-brand-white/10 first:border-transparent">
-              <div className="font-heading text-4xl md:text-5xl font-bold text-brand-white mb-2">
+            <div key={idx} className="text-center border-l border-brand-white/10 first:border-transparent md:border-l">
+              <div className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-brand-white mb-2">
                 {stat.value}
               </div>
               <div className="text-brand-white/50 text-xs tracking-[0.2em] uppercase font-bold">
@@ -70,6 +72,7 @@ export default function PerformanceShowcaseSection() {
             <button 
               className="absolute top-6 right-6 text-brand-white/50 hover:text-brand-red transition-colors z-[101]"
               onClick={() => setIsPlaying(false)}
+              aria-label="Close"
             >
               <X size={32} />
             </button>

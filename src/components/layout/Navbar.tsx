@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -40,6 +41,18 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
@@ -51,9 +64,11 @@ export default function Navbar() {
       <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between">
         <Link href="/" className="flex flex-col items-center gap-1 group" data-cursor-text="HOME">
           <div className={`relative overflow-hidden flex items-center justify-center rounded bg-brand-black transition-all duration-500 ${isScrolled ? "h-8 w-24" : "h-10 w-32"}`}>
-            <img 
+            <Image 
               src="/images/logo.png" 
-              alt="Nashik Dhol Logo" 
+              alt="Nashik Dhol Logo"
+              width={100}
+              height={50}
               className="absolute w-[200%] max-w-none h-auto left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" 
             />
           </div>
@@ -99,7 +114,7 @@ export default function Navbar() {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-brand-white hover:text-brand-red transition-colors"
+          className="md:hidden text-brand-white hover:text-brand-red transition-colors p-2 -mr-2"
           onClick={() => setMobileMenuOpen(true)}
           aria-label="Open menu"
         >
@@ -115,10 +130,10 @@ export default function Navbar() {
             animate={{ opacity: 1, clipPath: "circle(150% at 100% 0)" }}
             exit={{ opacity: 0, clipPath: "circle(0% at 100% 0)" }}
             transition={{ type: "spring", stiffness: 50, damping: 15 }}
-            className="fixed inset-0 bg-brand-black/95 backdrop-blur-xl z-50 flex flex-col items-center justify-center"
+            className="fixed inset-0 bg-brand-black/95 backdrop-blur-xl z-50 flex flex-col items-center justify-center pt-safe pb-safe"
           >
             <button
-              className="absolute top-6 right-6 text-brand-white/80 hover:text-brand-red transition-colors"
+              className="absolute top-6 right-6 text-brand-white/80 hover:text-brand-red transition-colors p-2"
               onClick={() => setMobileMenuOpen(false)}
               aria-label="Close menu"
             >
@@ -135,7 +150,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="font-heading text-4xl tracking-widest text-brand-white hover:text-brand-red transition-colors"
+                    className="font-heading text-3xl md:text-4xl tracking-widest text-brand-white hover:text-brand-red transition-colors p-2 block"
                   >
                     {link.name}
                   </Link>

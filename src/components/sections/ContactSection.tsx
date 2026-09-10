@@ -23,6 +23,10 @@ const bookingSchema = z.object({
 
 type BookingFormData = z.infer<typeof bookingSchema>;
 
+function generateBookingId() {
+  return `REQ-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+}
+
 export default function ContactSection() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [bookingId, setBookingId] = useState<string | null>(null);
@@ -59,7 +63,7 @@ Requirements: ${data.requirements || 'None'}
 
       window.open(whatsappUrl, '_blank');
       
-      const tempId = `REQ-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+      const tempId = generateBookingId();
       setBookingId(tempId);
       setIsSuccess(true);
     } catch {
@@ -80,7 +84,7 @@ Requirements: ${data.requirements || 'None'}
                 BOOK NOW
               </span>
             </div>
-            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-brand-white mb-6">
+            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-brand-white mb-6">
               MAKE YOUR EVENT <br />
               <span className="text-brand-red">UNFORGETTABLE.</span>
             </h2>

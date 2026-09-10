@@ -49,7 +49,7 @@ export default function AdminLayout({
   };
 
   return (
-    <div className="min-h-screen bg-brand-charcoal text-brand-white flex flex-col">
+    <div className="min-h-[100dvh] bg-brand-charcoal text-brand-white flex flex-col">
       <header className="bg-brand-black border-b border-brand-white/10 sticky top-0 z-40">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-8">

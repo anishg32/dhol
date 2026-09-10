@@ -1,6 +1,7 @@
 "use client";
 
 import { siteConfig } from "@/config/site";
+import Image from "next/image";
 
 export default function EventTypesSection() {
   return (
@@ -12,7 +13,7 @@ export default function EventTypesSection() {
               OUR EXPERTISE
             </span>
           </div>
-          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold text-brand-white">
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-brand-white">
             WHERE THE <span className="text-brand-red">RHYTHM</span> BELONGS
           </h2>
         </div>
@@ -27,11 +28,12 @@ export default function EventTypesSection() {
             >
               {/* 3D tilt effect base layer */}
               <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-110">
-                <img 
+                <Image 
                   src={event.image} 
                   alt={event.title}
-                  loading="lazy"
-                  className="w-full h-full object-cover opacity-60 group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-700"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover opacity-60 group-hover:opacity-100 grayscale group-hover:grayscale-0 transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-black via-brand-black/60 to-transparent mix-blend-multiply" />
                 <div className="absolute inset-0 border border-brand-white/0 group-hover:border-brand-gold/30 transition-colors duration-500 z-20" />
