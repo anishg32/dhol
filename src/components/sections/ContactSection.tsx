@@ -163,8 +163,9 @@ Requirements: ${data.requirements || 'None'}
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">FULL NAME</label>
+                        <label htmlFor="customerName" className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">FULL NAME</label>
                         <input 
+                          id="customerName"
                           {...register("customerName")}
                           type="text" 
                           className={`w-full bg-transparent border-b ${errors.customerName ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors`} 
@@ -173,8 +174,9 @@ Requirements: ${data.requirements || 'None'}
                         {errors.customerName && <p className="text-brand-red text-xs mt-1">{errors.customerName.message}</p>}
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">MOBILE NUMBER</label>
+                        <label htmlFor="mobileNumber" className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">MOBILE NUMBER</label>
                         <input 
+                          id="mobileNumber"
                           {...register("mobileNumber")}
                           type="tel" 
                           className={`w-full bg-transparent border-b ${errors.mobileNumber ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors`} 
@@ -186,8 +188,9 @@ Requirements: ${data.requirements || 'None'}
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">WHATSAPP NUMBER</label>
+                        <label htmlFor="whatsappNumber" className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">WHATSAPP NUMBER</label>
                         <input 
+                          id="whatsappNumber"
                           {...register("whatsappNumber")}
                           type="tel" 
                           className={`w-full bg-transparent border-b ${errors.whatsappNumber ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors`} 
@@ -196,8 +199,9 @@ Requirements: ${data.requirements || 'None'}
                         {errors.whatsappNumber && <p className="text-brand-red text-xs mt-1">{errors.whatsappNumber.message}</p>}
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">EMAIL ADDRESS</label>
+                        <label htmlFor="email" className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">EMAIL ADDRESS</label>
                         <input 
+                          id="email"
                           {...register("email")}
                           type="email" 
                           className={`w-full bg-transparent border-b ${errors.email ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors`} 
@@ -209,8 +213,9 @@ Requirements: ${data.requirements || 'None'}
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">EVENT TYPE</label>
+                        <label htmlFor="eventType" className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">EVENT TYPE</label>
                         <select 
+                          id="eventType"
                           {...register("eventType")}
                           defaultValue="" 
                           className={`w-full bg-brand-black border-b ${errors.eventType ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors appearance-none`}
@@ -224,8 +229,9 @@ Requirements: ${data.requirements || 'None'}
                         {errors.eventType && <p className="text-brand-red text-xs mt-1">{errors.eventType.message}</p>}
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">EVENT DATE</label>
+                        <label htmlFor="eventDate" className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">EVENT DATE</label>
                         <input 
+                          id="eventDate"
                           {...register("eventDate")}
                           type="date" 
                           className={`w-full bg-transparent border-b ${errors.eventDate ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white/50 focus:text-brand-white focus:outline-none focus:border-brand-red transition-colors [color-scheme:dark]`} 
@@ -236,8 +242,9 @@ Requirements: ${data.requirements || 'None'}
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">START TIME</label>
+                        <label htmlFor="eventStartTime" className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">START TIME</label>
                         <input 
+                          id="eventStartTime"
                           {...register("eventStartTime")}
                           type="time" 
                           className={`w-full bg-transparent border-b ${errors.eventStartTime ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white/50 focus:text-brand-white focus:outline-none focus:border-brand-red transition-colors [color-scheme:dark]`} 
@@ -245,8 +252,9 @@ Requirements: ${data.requirements || 'None'}
                         {errors.eventStartTime && <p className="text-brand-red text-xs mt-1">{errors.eventStartTime.message}</p>}
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">END TIME</label>
+                        <label htmlFor="eventEndTime" className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">END TIME</label>
                         <input 
+                          id="eventEndTime"
                           {...register("eventEndTime")}
                           type="time" 
                           className={`w-full bg-transparent border-b ${errors.eventEndTime ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white/50 focus:text-brand-white focus:outline-none focus:border-brand-red transition-colors [color-scheme:dark]`} 
@@ -257,8 +265,9 @@ Requirements: ${data.requirements || 'None'}
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">EVENT LOCATION</label>
+                        <label htmlFor="eventLocation" className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">EVENT LOCATION</label>
                         <input 
+                          id="eventLocation"
                           {...register("eventLocation")}
                           type="text" 
                           className={`w-full bg-transparent border-b ${errors.eventLocation ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors`} 
@@ -267,8 +276,9 @@ Requirements: ${data.requirements || 'None'}
                         {errors.eventLocation && <p className="text-brand-red text-xs mt-1">{errors.eventLocation.message}</p>}
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">EXPECTED CROWD</label>
+                        <label htmlFor="expectedCrowd" className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">EXPECTED CROWD</label>
                         <select 
+                          id="expectedCrowd"
                           {...register("expectedCrowd")}
                           defaultValue=""
                           className={`w-full bg-brand-black border-b ${errors.expectedCrowd ? 'border-brand-red' : 'border-brand-white/20'} px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors appearance-none`}
@@ -284,8 +294,9 @@ Requirements: ${data.requirements || 'None'}
                     </div>
 
                     <div className="space-y-2 pt-2">
-                      <label className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">ADDITIONAL REQUIREMENTS (OPTIONAL)</label>
+                      <label htmlFor="requirements" className="text-[10px] font-bold tracking-[0.2em] text-brand-white/50">ADDITIONAL REQUIREMENTS (OPTIONAL)</label>
                       <textarea 
+                        id="requirements"
                         {...register("requirements")}
                         rows={3} 
                         className="w-full bg-transparent border-b border-brand-white/20 px-0 py-3 text-brand-white focus:outline-none focus:border-brand-red transition-colors resize-none" 
